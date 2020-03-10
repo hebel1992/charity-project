@@ -1,4 +1,4 @@
-package pl.coderslab.charityproject;
+package pl.coderslab.charityproject.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
