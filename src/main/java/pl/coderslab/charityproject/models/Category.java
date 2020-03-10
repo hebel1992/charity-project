@@ -11,13 +11,14 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Getter
-@Setter
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "categories")
 public class Category extends AbstractEntity {
+    @Getter
+    @Setter
     @NotNull
     @Size(min = 3, message = "min 3 characters")
     @Column(name = "name")
