@@ -18,8 +18,9 @@ import java.util.List;
 @Entity
 @Table(name = "donations")
 public class Donation extends AbstractEntity {
+
     @NotNull
-    @Column(name = "name")
+    @Column(name = "quantity")
     private Integer quantity;
 
     @Column(name = "street")
