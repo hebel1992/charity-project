@@ -1438,7 +1438,7 @@ header nav ul li:last-of-type {
 
 /* line 54, scss/modules/homepage-sections/_help.scss */
 .help--slides-items .col {
-  width: 100%;
+  min: 50%;
 }
 
 /* line 57, scss/modules/homepage-sections/_help.scss */
