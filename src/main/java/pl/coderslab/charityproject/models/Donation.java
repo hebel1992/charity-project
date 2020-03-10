@@ -29,6 +29,9 @@ public class Donation extends AbstractEntity {
     @Column(name = "city")
     private String city;
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
     @Column(name = "zip_code")
     private String zipCode;
 
