@@ -23,6 +23,16 @@ public class HomeController {
         return "index";
     }
 
+    @RequestMapping("/register")
+    public String registerForm() {
+        return "register";
+    }
+
+    @RequestMapping("/login")
+    public String loginForm() {
+        return "login";
+    }
+
     @ModelAttribute("institutions")
     public List<Institution> getAllInstitutions() {
         return institutionService.findAll();
