@@ -12,6 +12,10 @@ import java.util.List;
 public class DonationService {
     private final DonationRepository donationRepository;
 
+    public void saveDonation(Donation donation){
+        donationRepository.save(donation);
+    }
+
     public List<Donation> findAll() {
         return donationRepository.findAll();
     }

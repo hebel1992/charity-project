@@ -7,9 +7,11 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 
 @NoArgsConstructor
@@ -23,4 +25,7 @@ public class Category extends AbstractEntity {
     @Size(min = 3, message = "min 3 characters")
     @Column(name = "name")
     private String name;
+
+    @ManyToMany(mappedBy = "categories")
+    private Set<Donation> donations;
 }

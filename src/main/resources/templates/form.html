@@ -79,41 +79,42 @@
     </div>
 
     <div class="form--steps-container">
+
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-        <form th:action="@{'/donate-excute'}" method="post" th:object="${donation}">
+        <form th:action="@{'/donate-execute'}" method="post" th:object="${donation}">
             <!-- STEP 1: class .active is switching steps -->
-            <div data-step="1" class="active">
-                <h3>Zaznacz co chcesz oddać:</h3>
 
-                <tr th:each="category: ${categories}">
-                    <div class="form-group form-group--checkbox">
-                        <label>
-                            <input
-                                    type="checkbox"
-                                    name="categories"
-                                    th:value="${category.id}"
-                            />
-                            <span th:class="checkbox"></span>
-                            <span th:text="${category.name}" class="description"></span>
-                        </label>
-                    </div>
-                </tr>
+            <div data-step="1" class="active">
+                <h3 id="error-msg-place">Zaznacz co chcesz oddać:</h3>
+                <p class="error-message" th:if="${#fields.hasErrors('categories')}" th:errors="*{categories}"></p>
+                <div style="font-size: 25px" class="form-group" th:each="category: ${categories}">
+                    <label>
+                        <input style="height: 20px"
+                               name="categories"
+                               th:type="checkbox"
+                               th:value="${category.id}"
+                               th:field="*{categories}"
+                        />
+                        <span name="category" hidden="hidden" th:text="${category.name}"></span>
+                        <span th:text="${category.name}" class="description"></span>
+                    </label>
+                </div>
 
                 <div class="form-group form-group--buttons">
-                    <button type="button" class="btn next-step">Dalej</button>
+                    <button type="button" class="btn next-step" id="choose-cat-btn">Dalej</button>
                 </div>
             </div>
 
             <!-- STEP 2 -->
             <div data-step="2">
                 <h3>Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h3>
-
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60l worków:
                         <input type="number" id="bags" step="1" min="1" th:field="*{quantity}"/>
                     </label>
+                    <span class="error-message" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></span>
                 </div>
 
                 <div class="form-group form-group--buttons">
@@ -126,10 +127,11 @@
             <!-- STEP 3 -->
             <div data-step="3">
                 <h3>Wybierz organizacje, której chcesz pomóc:</h3>
-
+                <p class="error-message" th:if="${#fields.hasErrors('institution')}" th:errors="*{institution}"></p>
                 <div class="form-group form-group--checkbox" th:each="institution : ${institutions}">
                     <label>
-                        <input name="institution" th:type="radio" th:value="${institution.id}" th:field="*{institution}"/>
+                        <input name="institution" th:type="radio" th:value="${institution.id}"
+                               th:field="*{institution}"/>
                         <span class="checkbox radio"></span>
                         <span id="institution-name" hidden="hidden" th:text="${institution.name}"></span>
                         <span class="description">
@@ -154,22 +156,29 @@
                         <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
                             <label> Ulica <input id="street" type="text" th:field="*{street}"/> </label>
+                            <span class="error-message" th:if="${#fields.hasErrors('street')}"
+                                  th:errors="*{street}"></span>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label> Miasto <input id="city" type="text" th:field="*{city}"/> </label>
+                            <span class="error-message" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
                                 Kod pocztowy <input id="zip-code" type="text" th:field="*{zipCode}"/>
                             </label>
+                            <span class="error-message" th:if="${#fields.hasErrors('zipCode')}"
+                                  th:errors="*{zipCode}"></span>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Numer telefonu <input id="phone" type="phone" th:field="*{phoneNumber}"/>
+                                Numer telefonu <input id="phone" type="text" th:field="*{phoneNumber}"/>
                             </label>
+                            <span class="error-message" th:if="${#fields.hasErrors('phoneNumber')}"
+                                  th:errors="*{phoneNumber}"></span>
                         </div>
                     </div>
 
@@ -177,10 +186,14 @@
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
                             <label> Data <input id="date" type="date" th:field="*{pickUpDate}"/> </label>
+                            <span class="error-message" th:if="${#fields.hasErrors('pickUpDate')}"
+                                  th:errors="*{pickUpDate}"></span>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label> Godzina <input id="time" type="time" th:field="*{pickUpTime}"/> </label>
+                            <span class="error-message" th:if="${#fields.hasErrors('pickUpTime')}"
+                                  th:errors="*{pickUpTime}"></span>
                         </div>
 
                         <div class="form-group form-group--inline">
@@ -208,15 +221,13 @@
                             <li>
                                 <span class="icon icon-bag"></span>
                                 <span class="summary--text"
-                                >4 worki ubrań w dobrym stanie dla dzieci</span
-                                >
+                                ><span id="display-bags"></span><span id="display-cat"></span></span>
                             </li>
 
                             <li>
                                 <span class="icon icon-hand"></span>
                                 <span class="summary--text"
-                                >Dla fundacji <span id="display-institution-name"></span></span
-                                >
+                                >Dla fundacji <span id="display-institution-name"></span></span>
                             </li>
                         </ul>
                     </div>
@@ -290,8 +301,26 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
     $(document).ready(function () {
+
+        if ($('.error-message').length) {
+            $('html, body').animate({
+                scrollTop: $('.form--steps-container').offset().top
+            }, 800, function () {
+            });
+
+            $('<div style="color: red; font-size: 30px; display: flow; margin-bottom: 30px">Uzupełnij pola oznaczone na czerwono</div>').insertAfter('#error-msg-place');
+        }
+
+        let categories = [];
+
+        $('#choose-cat-btn').click(function () {
+            $.each($("input[name='categories']:checked"), function () {
+                categories.push($(this).next().next().text());
+            });
+        })
+
         $('#choose-inst-btn').click(function () {
-            let instName= $("input[name='institution']:checked").next().next().text();
+            let instName = $("input[name='institution']:checked").next().next().text();
             $('#display-institution-name').text(instName);
         })
 
@@ -302,7 +331,23 @@
             $('#display-phone').text($('#phone').val());
             $('#display-date').text($('#date').val());
             $('#display-time').text($('#time').val());
-            $('#display-comment').text($('#comment').val());
+
+            let comment = ($('#comment').val());
+            if (comment.length == 0) {
+                $('#display-comment').text('brak uwag')
+            } else {
+                $('#display-comment').text(comment)
+            }
+
+            $('#display-cat').text(categories.join(", "));
+
+            if ($('#bags').val() == 1) {
+                $('#display-bags').text($('#bags').val() + ' worek zawierjący: ');
+            } else if ($('#bags').val() > 1 && $('#bags').val() < 5) {
+                $('#display-bags').text($('#bags').val() + ' worki zawierjące: ');
+            } else {
+                $('#display-bags').text($('#bags').val() + ' worków zawierających: ');
+            }
         })
     });
 </script>
