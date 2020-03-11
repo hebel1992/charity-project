@@ -2,10 +2,13 @@ package pl.coderslab.charityproject.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charityproject.models.Donation;
 import pl.coderslab.charityproject.models.Institution;
+import pl.coderslab.charityproject.models.User;
 import pl.coderslab.charityproject.services.DonationService;
 import pl.coderslab.charityproject.services.InstitutionService;
 
@@ -24,8 +27,14 @@ public class HomeController {
     }
 
     @RequestMapping("/register")
-    public String registerForm() {
+    public String registerForm(Model model) {
+        model.addAttribute("user", new User());
         return "register";
+    }
+
+    @PostMapping("/register-action")
+    public String registerAction(){
+        return "redirect:/home";
     }
 
     @RequestMapping("/login")
