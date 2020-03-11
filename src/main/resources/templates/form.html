@@ -118,7 +118,7 @@
                 </div>
 
                 <div class="form-group form-group--buttons">
-                    <button type="button" class="btn prev-step">Wstecz</button>
+                    <button id="back-to-cat" type="button" class="btn prev-step">Wstecz</button>
                     <button type="button" class="btn next-step">Dalej</button>
                 </div>
             </div>
@@ -227,7 +227,7 @@
                             <li>
                                 <span class="icon icon-hand"></span>
                                 <span class="summary--text"
-                                >Dla fundacji <span id="display-institution-name"></span></span>
+                                ><span id="display-institution-name"></span></span>
                             </li>
                         </ul>
                     </div>
@@ -308,7 +308,7 @@
             }, 800, function () {
             });
 
-            $('<div style="color: red; font-size: 30px; display: flow; margin-bottom: 30px">Uzupełnij pola oznaczone na czerwono</div>').insertAfter('#error-msg-place');
+            $('<div style="color: red; font-size: 30px; display: flow; margin-bottom: 30px">Popraw pola oznaczone na czerwono</div>').insertAfter('#error-msg-place');
         }
 
         let categories = [];
@@ -319,13 +319,17 @@
             });
         })
 
+        $('#back-to-cat').click(function () {
+            categories = [];
+        })
+
         $('#choose-inst-btn').click(function () {
             let instName = $("input[name='institution']:checked").next().next().text();
-            $('#display-institution-name').text(instName);
+            $('#display-institution-name').text('Dla Fundacji ' + instName);
         })
 
         $('#go-to-summary').click(function () {
-            $('#display-street').text($('#street').val());
+            $('#display-street').text('ul.  ' + $('#street').val());
             $('#display-city').text($('#city').val());
             $('#display-zip-code').text($('#zip-code').val());
             $('#display-phone').text($('#phone').val());
@@ -344,7 +348,7 @@
             if ($('#bags').val() == 1) {
                 $('#display-bags').text($('#bags').val() + ' worek zawierjący: ');
             } else if ($('#bags').val() > 1 && $('#bags').val() < 5) {
-                $('#display-bags').text($('#bags').val() + ' worki zawierjące: ');
+                $('#display-bags').text($('#bags').val() + ' worki zawierające: ');
             } else {
                 $('#display-bags').text($('#bags').val() + ' worków zawierających: ');
             }
