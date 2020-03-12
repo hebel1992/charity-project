@@ -1,8 +1,10 @@
 package pl.coderslab.charityproject;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -11,7 +13,9 @@ import pl.coderslab.charityproject.services.SpringDataUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableGlobalMethodSecurity(securedEnabled = true)
+@ComponentScan({"pl.coderslab.charityproject"})
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -24,17 +28,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailsService())
+        auth
+                .userDetailsService(customUserDetailsService())
                 .passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/").permitAll()
+        http.
+                authorizeRequests()
+                .antMatchers("/", "/login", "/register").permitAll()
                 .antMatchers("/home").authenticated()
                 .and().formLogin()
                 .loginPage("/login")
-                .and().logout().logoutSuccessUrl("/");
+                .defaultSuccessUrl("/home")
+                .failureUrl("/login-error")
+                .and()
+                .logout().logoutSuccessUrl("/");
     }
 }

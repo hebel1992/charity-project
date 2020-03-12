@@ -23,4 +23,10 @@ INSERT INTO donations_categories (donation_id, category_id) VALUES (3, 4);
 INSERT INTO donations_categories (donation_id, category_id) VALUES (4, 1);
 INSERT INTO donations_categories (donation_id, category_id) VALUES (4, 5);
 
+INSERT INTO role (id, name, description) VALUES (1, 'ROLE_ADMIN', 'Admin');
+INSERT INTO role (id, name, description) VALUES (2, 'ROLE_USER', 'User');
+
+INSERT INTO user (email, enabled, first_name, last_name, password, username) VALUES ('b.kowal@wp.pl', 1, 'Bartosz', 'Kowalski', '$2a$10$vDXXSvQzoHKDvPwcP4cQt.IIA.GAA0raTAWPLMBrZ3/CfVW0vr4oC', 'testuser');
+INSERT INTO user_role (user_id, role_id) VALUES (1,2);
+
 

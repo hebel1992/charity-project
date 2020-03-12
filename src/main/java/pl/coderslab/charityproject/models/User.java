@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
@@ -16,8 +17,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Size(min = 3, max = 15, message = "min 3, max 15 znaków")
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @NotNull
+    @Size(min = 2, max = 15, message = "min 2, max 15 znaków")
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @NotNull
+    @Email
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
+    @NotNull
+    @Size(min = 8, max = 15, message = "min 8, max 15 znaków")
     @Column(name = "username", nullable = false, unique = true)
-    @Size(min = 5, max = 15)
     private String username;
 
     @Column(name = "password", nullable = false)
