@@ -35,16 +35,20 @@ public class HomeController {
     }
 
     @PostMapping("/register-action")
-    public String registerAction(@RequestParam("password2") String pass2, @ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+    public String registerAction(Model model, @RequestParam("password2") String pass2, @ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            return "register";
+        }
+
+        if (!user.getPassword().equals(pass2)) {
+            model.addAttribute("passNoMatch", true);
             return "register";
         }
 
         userService.saveUser(user);
 
-//        if (!user.getPassword().equals(pass2)) {
-//            return "register";
-//        }
+        model.addAttribute("passNoMatch", false);
+
         return "redirect:/login";
     }
 
