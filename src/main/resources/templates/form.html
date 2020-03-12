@@ -27,12 +27,14 @@
         </form>
 
         <ul>
-            <li><a href="#" class="btn btn--without-border active">Start</a></li>
+            <li><a th:href="@{'/home?formSuccess=false'}" class="btn btn--without-border active">Start</a></li>
             <li><a id="steps" class="btn btn--without-border">O co chodzi?</a></li>
             <li><a id="form" class="btn btn--without-border">Formularz</a></li>
             <li><a id="contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
     </nav>
+
+    <h1 th:if="${formSuccess}" align="center" style="margin-top: 60px; color: green">Twoje zgłoszenie zostało wysłane. Dziękujemy!</h1>
 
     <div class="slogan container container--90">
         <div class="slogan--item">

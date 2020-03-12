@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.coderslab.charityproject.models.Category;
 import pl.coderslab.charityproject.models.Donation;
 import pl.coderslab.charityproject.models.Institution;
@@ -25,8 +26,9 @@ public class DonationController {
     private final DonationService donationService;
 
     @GetMapping("/home")
-    public String donateAction(Model model) {
+    public String donateAction(Model model, @RequestParam("formSuccess") Boolean success) {
         model.addAttribute("donation", new Donation());
+        model.addAttribute("formSuccess", success);
         return "form";
     }
 
@@ -37,7 +39,7 @@ public class DonationController {
         }
         donationService.saveDonation(donation);
 
-        return "redirect:/";
+        return "redirect:home?formSuccess=true";
     }
 
     @ModelAttribute("institutions")
