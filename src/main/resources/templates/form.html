@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,21 +13,24 @@
     <nav class="container container--70">
         <ul class="nav--actions">
             <li class="logged-user">
-                Witaj Agata
+                <span>Witaj </span><span sec:authentication="principal.username"></span>
                 <ul class="dropdown">
                     <li><a href="#">Profil</a></li>
                     <li><a href="#">Moje zbiórki</a></li>
-                    <li><a href="#">Wyloguj</a></li>
+                    <li><a href="javascript: document.logoutForm.submit()">Wyloguj</a></li>
                 </ul>
             </li>
         </ul>
 
+        <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+            <input hidden type="submit" value="Sign Out"/>
+        </form>
+
         <ul>
-            <li><a href="index.html" class="btn btn--without-border active">Start</a></li>
-            <li><a href="index.html#steps" class="btn btn--without-border">O co chodzi?</a></li>
-            <li><a href="index.html#about-us" class="btn btn--without-border">O nas</a></li>
-            <li><a href="index.html#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
-            <li><a href="index.html#contact" class="btn btn--without-border">Kontakt</a></li>
+            <li><a href="#" class="btn btn--without-border active">Start</a></li>
+            <li><a id="steps" class="btn btn--without-border">O co chodzi?</a></li>
+            <li><a id="form" class="btn btn--without-border">Formularz</a></li>
+            <li><a id="contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
     </nav>
 
@@ -302,6 +306,34 @@
 <script>
     $(document).ready(function () {
 
+        $('#steps').click(function () {
+            $('html, body').animate({
+                scrollTop: $('.slogan--item').offset().top
+            }, 800, function () {
+            });
+        })
+
+        $('#contact').click(function () {
+            $('html, body').animate({
+                scrollTop: $('.contact').offset().top
+            }, 800, function () {
+            });
+        })
+
+        $('#form').click(function () {
+            $('html, body').animate({
+                scrollTop: $('.form--steps').offset().top
+            }, 800, function () {
+            });
+        })
+
+        // $('#steps').click(function () {
+        //     $('html, body').animate({
+        //         scrollTop: $('.about-us').offset().top
+        //     }, 800, function () {
+        //     });
+        // })
+
         if ($('.error-message').length) {
             $('html, body').animate({
                 scrollTop: $('.form--steps-container').offset().top
@@ -325,11 +357,11 @@
 
         $('#choose-inst-btn').click(function () {
             let instName = $("input[name='institution']:checked").next().next().text();
-            $('#display-institution-name').text('Dla Fundacji ' + instName);
+            $('#display-institution-name').text('Dla Fundacji: ' + instName);
         })
 
         $('#go-to-summary').click(function () {
-            $('#display-street').text('ul.  ' + $('#street').val());
+            $('#display-street').text($('#street').val());
             $('#display-city').text($('#city').val());
             $('#display-zip-code').text($('#zip-code').val());
             $('#display-phone').text($('#phone').val());
