@@ -96,6 +96,67 @@
 
 <div th:include="footer.html"></div>
 
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#go-to-steps').click(function () {
+            $('html, body').animate({
+                scrollTop: $('.steps').offset().top
+            }, 800, function () {
+            });
+        })
+
+        $('#go-to-about-us').click(function () {
+            $('html, body').animate({
+                scrollTop: $('.about-us').offset().top
+            }, 800, function () {
+            });
+        })
+
+        $('#go-to-inst').click(function () {
+            $('html, body').animate({
+                scrollTop: $('.help').offset().top
+            }, 800, function () {
+            });
+        })
+
+        $('#go-to-contact').click(function () {
+            $('html, body').animate({
+                scrollTop: $('.contact').offset().top
+            }, 800, function () {
+            });
+        })
+
+
+        if (window.location.href.indexOf("#steps") > -1) {
+            $('html, body').animate({
+                scrollTop: $('.steps').offset().top
+            }, 800, function () {
+            });
+        }
+
+        if (window.location.href.indexOf("#about-us") > -1) {
+            $('html, body').animate({
+                scrollTop: $('.about-us').offset().top
+            }, 800, function () {
+            });
+        }
+
+        if (window.location.href.indexOf("#help") > -1) {
+            $('html, body').animate({
+                scrollTop: $('.help').offset().top
+            }, 800, function () {
+            });
+        }
+
+        if (window.location.href.indexOf("#contact") > -1) {
+            $('html, body').animate({
+                scrollTop: $('.contact').offset().top
+            }, 800, function () {
+            });
+        }
+    });
+</script>
 <script th:href="@{js/app.js}"></script>
 </body>
 </html>
