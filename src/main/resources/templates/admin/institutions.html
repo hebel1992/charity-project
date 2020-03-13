@@ -27,8 +27,10 @@
             <div class="container-fluid">
                 <div th:include="/admin/admin-sub-header.html"></div>
                 <div class="card mb-4">
-                    <div class="card-header"><i class="fas fa-table mr-1"></i>Lista Fundacji</div>
+                    <div class="card-header align-middle"><i class="fas fa-table mr-1"></i>Lista Fundacji</div>
                     <div class="card-body">
+                        <a th:href="@{/admin/add-institution}" type="button" class="btn btn-primary add-element">Dodaj
+                            fundację</a>
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
@@ -51,10 +53,10 @@
                                             th:href="@{'/admin/edit-institution/' + ${institution.id}}">
                                         <i class="fas fa-edit"></i></a></td>
                                     <td style="text-align: center"><a href="#" data-toggle="modal"
-                                                                      data-target="#deleteModal">
+                                                                      th:data-target="'#deleteModal'+${institution.id}">
                                         <i class="fas fa-trash-alt" style="color: red"></i></a></td>
 
-                                    <div class="modal fade" id="deleteModal">
+                                    <div class="modal fade" th:id="deleteModal+${institution.id}">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">

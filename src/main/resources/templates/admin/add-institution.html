@@ -29,10 +29,9 @@
                 <div th:include="/admin/admin-sub-header.html"></div>
 
                 <div class="card mb-4">
-                    <div class="card-header"><i class="fas fa-table mr-1"></i>Edycja Fundacji</div>
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>Tworzenie Fundacji</div>
                     <div class="card-body">
                         <form th:action="@{/admin/edit-institution-action}" method="post" th:object="${institution}">
-                            <input type="hidden" th:field="*{id}">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputName">Nazwa</label>
