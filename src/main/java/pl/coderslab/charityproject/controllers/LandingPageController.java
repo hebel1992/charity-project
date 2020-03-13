@@ -2,7 +2,6 @@ package pl.coderslab.charityproject.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charityproject.models.Donation;
@@ -15,7 +14,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class HomeController {
+public class LandingPageController {
     private final InstitutionService institutionService;
     private final DonationService donationService;
 

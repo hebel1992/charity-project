@@ -11,6 +11,6 @@ public class AdminController {
 
     @RequestMapping
     public String mainPage(){
-        return "admin/main";
+        return "/admin/admin-main";
     }
 }

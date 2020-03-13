@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class DonationController {
+public class HomePageController {
     private final InstitutionService institutionService;
     private final CategoryService categoryService;
     private final DonationService donationService;

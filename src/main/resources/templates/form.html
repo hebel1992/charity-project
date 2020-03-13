@@ -34,7 +34,8 @@
         </ul>
     </nav>
 
-    <h1 th:if="${formSuccess}" align="center" style="margin-top: 60px; color: green">Twoje zgłoszenie zostało wysłane. Dziękujemy!</h1>
+    <h1 th:if="${formSuccess}" align="center" style="margin-top: 60px; color: green">Twoje zgłoszenie zostało wysłane.
+        Dziękujemy!</h1>
 
     <div class="slogan container container--90">
         <div class="slogan--item">
@@ -191,7 +192,8 @@
                     <div class="form-section--column">
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Data <input id="date" type="date" max="9999-12-12" th:field="*{pickUpDate}"/> </label>
+                            <label> Data <input id="date" type="date" max="9999-12-12" th:field="*{pickUpDate}"/>
+                            </label>
                             <span class="error-message" th:if="${#fields.hasErrors('pickUpDate')}"
                                   th:errors="*{pickUpDate}"></span>
                         </div>
