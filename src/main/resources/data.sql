@@ -29,4 +29,8 @@ INSERT INTO role (id, name, description) VALUES (2, 'ROLE_USER', 'User');
 INSERT INTO user (email, enabled, first_name, last_name, password, username) VALUES ('b.kowal@wp.pl', 1, 'Bartosz', 'Kowalski', '$2a$10$vDXXSvQzoHKDvPwcP4cQt.IIA.GAA0raTAWPLMBrZ3/CfVW0vr4oC', 'testuser');
 INSERT INTO user_role (user_id, role_id) VALUES (1,2);
 
+INSERT INTO user (email, enabled, first_name, last_name, password, username) VALUES ('m.nowak@o2.pl', 1, 'Marek', 'Nowak', '$2a$10$ssLUf7WmudX9ZT9jzSBrUuS4jt/zXimoqDfqYI2S8PUiVOOlW1U16', 'testadmin');
+INSERT INTO user_role (user_id, role_id) VALUES (2,1);
+INSERT INTO user_role (user_id, role_id) VALUES (2,2);
+
 
