@@ -66,6 +66,7 @@ public class Donation extends AbstractEntity {
     private Set<Category> categories;
 
     @NotNull(message = "nie zaznaczono instytucji")
+    @JoinColumn(name = "institution_id")
     @ManyToOne
     private Institution institution;
 }

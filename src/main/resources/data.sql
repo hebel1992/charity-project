@@ -1,7 +1,7 @@
-INSERT INTO institutions (description, name) VALUES ('Cel i misja: Pomoc dzieciom z ubogich rodzin.' ,'"Dbam o Zdrowie"');
-INSERT INTO institutions (description, name) VALUES ('Cel i misja: Pomoc wybudzaniu dzieci ze śpiączki.' ,'"A kogo"');
-INSERT INTO institutions (description, name) VALUES ('Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji życiowej.' ,'"Dla dzieci"');
-INSERT INTO institutions (description, name) VALUES ('Cel i misja: Pomoc dla osób nie posiadających miejsca zamieszkania' ,'"Bez domu"');
+INSERT INTO institutions (description, name, city, phone_number) VALUES ('"Pomoc dzieciom z ubogich rodzin."' ,'"Dbam o Zdrowie"', 'Warszawa', '764123890');
+INSERT INTO institutions (description, name, city, phone_number) VALUES ('"Pomoc wybudzaniu dzieci ze śpiączki."' ,'"A kogo"', 'Wrocław', '235283902');
+INSERT INTO institutions (description, name, city, phone_number) VALUES ('"Pomoc osobom znajdującym się w trudnej sytuacji życiowej."' ,'"Dla dzieci"', 'Kraków', '159345019');
+INSERT INTO institutions (description, name, city, phone_number) VALUES ('"Pomoc dla osób nie posiadających miejsca zamieszkania"' ,'"Bez domu"', 'Poznań', '578098123');
 
 INSERT INTO donations (city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, phone_number) VALUES ('Wrocław', '2020-03-14', '15:30', 3, 'ul. Mala 3', '32-500', 1, '324678421');
 INSERT INTO donations (city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, pick_up_comment, phone_number) VALUES ('Poznań', '2020-03-16', '15:45', 5, 'ul. Duza 4', '78-300', 2, 'Komentarz do odbioru', '3562453422');

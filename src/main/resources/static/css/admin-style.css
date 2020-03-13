@@ -10212,3 +10212,10 @@ body {
 .sb-sidenav-light .sb-sidenav-footer {
     background-color: #e9ecef;
 }
+
+.error-message{
+    color: red;
+    font-size: 15px;
+}
+
+

@@ -81,13 +81,13 @@
             <li>
                 <div class="col" th:each="institution, iterStat: ${institutions}" th:if="${iterStat.index%2==0}">
                     <div class="title" th:text="'Fundacja ' + ${institution.name}"></div>
-                    <div class="subtitle" th:text="${institution.description}"></div>
+                    <div class="subtitle" th:text="'Cel i misja: ' + ${institution.description}"></div>
                 </div>
             </li>
             <li>
                 <div class="col" th:each="institution, iterStat: ${institutions}" th:if="${iterStat.index%2!=0}">
                     <div class="title" th:text="'Fundacja ' + ${institution.name}"></div>
-                    <div class="subtitle" th:text="${institution.description}"></div>
+                    <div class="subtitle" th:text="'Cel i misja: ' + ${institution.description}"></div>
                 </div>
             </li>
         </ul>

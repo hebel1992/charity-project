@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Panel Administratora</title>
+    <link th:href="@{/css/admin-style.css}" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
+          crossorigin="anonymous"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
+            crossorigin="anonymous"></script>
+</head>
+<body class="sb-nav-fixed">
+
+<div th:include="/admin/admin-header.html"></div>
+
+<div id="layoutSidenav">
+
+    <div th:include="/admin/admin-sidenav.html"></div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <div th:include="/admin/admin-sub-header.html"></div>
+                <div class="card mb-4">
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>Edycja Fundacji</div>
+                    <div class="card-body">
+                        <form th:action="@{/admin/edit-institution-action}" method="post" th:object="${institution}">
+                            <input type="hidden" th:field="*{id}">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputName">Nazwa</label>
+                                    <input th:field="*{name}" type="text" class="form-control" id="inputName">
+                                    <span class="error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputCity">Miasto</label>
+                                    <input th:field="*{city}" type="text" class="form-control" id="inputCity">
+                                    <span class="error-message" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputDescription">Cel i misja</label>
+                                <input th:field="*{description}" type="text" class="form-control" id="inputDescription">
+                                <span class="error-message" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPhone">Numer telefonu</label>
+                                <input th:field="*{phoneNumber}" type="text" class="form-control" id="inputPhone">
+                                <span class="error-message" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+                            <a type="button" th:href="@{/admin/institutions}" class="btn btn-primary">Wróć</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div th:include="/admin/admin-footer.html"></div>
+
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<script>
+    /*!
+    * Start Bootstrap - SB Admin v6.0.0 (https://startbootstrap.com/templates/sb-admin)
+    * Copyright 2013-2020 Start Bootstrap
+    * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin/blob/master/LICENSE)
+    */
+    (function ($) {
+        "use strict";
+
+        // Add active state to sidbar nav links
+        var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+        $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function () {
+            if (this.href === path) {
+                $(this).addClass("active");
+            }
+        });
+
+        // Toggle the side navigation
+        $("#sidebarToggle").on("click", function (e) {
+            e.preventDefault();
+            $("body").toggleClass("sb-sidenav-toggled");
+        });
+
+
+    })(jQuery);
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="assets/demo/chart-area-demo.js"></script>
+<script src="assets/demo/chart-bar-demo.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="assets/demo/datatables-demo.js"></script>
+</body>
+</html>

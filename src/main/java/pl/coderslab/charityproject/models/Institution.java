@@ -5,11 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,7 +18,7 @@ import javax.validation.constraints.Size;
 @Table(name = "institutions")
 public class Institution extends AbstractEntity {
     @NotNull
-    @Size(min = 3, message = "min 3 characters")
+    @Size(min = 3, message = "min 3 znaki")
     @Column(name = "name")
     private String name;
 
@@ -27,4 +26,17 @@ public class Institution extends AbstractEntity {
     @Size(min = 10, message = "min 10 characters")
     @Column(name = "description")
     private String description;
+
+    @NotNull
+    @Size(min = 3, message = "min 3 znaki")
+    @Column(name = "city")
+    private String city;
+
+    @NotNull
+    @Size(min = 8, max = 10, message = "min 8, max 10 znaków")
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @OneToMany(mappedBy = "institution", cascade = CascadeType.REMOVE)
+    private List<Donation> donations;
 }
