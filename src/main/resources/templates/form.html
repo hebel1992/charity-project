@@ -191,7 +191,7 @@
                     <div class="form-section--column">
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Data <input id="date" type="date" th:field="*{pickUpDate}"/> </label>
+                            <label> Data <input id="date" type="date" max="9999-12-12" th:field="*{pickUpDate}"/> </label>
                             <span class="error-message" th:if="${#fields.hasErrors('pickUpDate')}"
                                   th:errors="*{pickUpDate}"></span>
                         </div>
@@ -306,7 +306,7 @@
 </footer>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-    $(document).ready(function () {
+    $(function () {
 
         $('#steps').click(function () {
             $('html, body').animate({
@@ -329,20 +329,13 @@
             });
         })
 
-        // $('#steps').click(function () {
-        //     $('html, body').animate({
-        //         scrollTop: $('.about-us').offset().top
-        //     }, 800, function () {
-        //     });
-        // })
-
         if ($('.error-message').length) {
             $('html, body').animate({
                 scrollTop: $('.form--steps-container').offset().top
             }, 800, function () {
             });
 
-            $('<div style="color: red; font-size: 30px; display: flow; margin-bottom: 30px">Popraw pola oznaczone na czerwono</div>').insertAfter('#error-msg-place');
+            $('<p style="color: red; font-size: 30px; display: flow; margin-bottom: 30px; alignment: center">Popraw pola oznaczone na czerwono.</p>').insertBefore('#error-msg-place');
         }
 
         let categories = [];

@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -26,7 +27,7 @@ public class Donation extends AbstractEntity {
     private Integer quantity;
 
     @NotNull
-    @Size(min = 5, message = "min 5 znaków")
+    @Size(min = 3, message = "min 3 znaki")
     @Column(name = "street")
     private String street;
 
@@ -57,8 +58,9 @@ public class Donation extends AbstractEntity {
     @Column(name = "pick_up_comment")
     private String pickUpComment;
 
+    @NotNull
     @Size(min = 1, message = "nie podano kategorii")
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "donations_categories", joinColumns = @JoinColumn(name = "donation_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories;
