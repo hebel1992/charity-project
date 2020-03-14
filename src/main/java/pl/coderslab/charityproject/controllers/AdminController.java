@@ -25,11 +25,11 @@ public class AdminController {
 
     @RequestMapping("/admins")
     public String adminsList() {
-        return "/admins/admin-list";
+        return "/admins/admins-list";
     }
 
     @RequestMapping("/delete-admin/{instId}")
-    public String deleteInstitutionAction(@PathVariable("instId") Long instId) {
+    public String deleteAdminAction(@PathVariable("instId") Long instId) {
         User admin = userService.findById(instId);
         userService.deleteUser(admin);
 
@@ -44,7 +44,7 @@ public class AdminController {
     }
 
     @PostMapping("/edit-admin-action")
-    public String editInstitutionAction(Model model, @RequestParam("password2") String pass2,
+    public String editAdminAction(Model model, @RequestParam("password2") String pass2,
                                         @ModelAttribute("admin") @Valid User admin, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/admins/edit-admin";

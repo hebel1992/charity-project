@@ -62,4 +62,9 @@ public class UserServiceImpl implements UserService {
     public List<User> findAdmins() {
        return userRepository.findByRoles_Id(1L);
     }
+
+    @Override
+    public List<User> findUsers() {
+        return userRepository.findByRoles_Id(2L);
+    }
 }

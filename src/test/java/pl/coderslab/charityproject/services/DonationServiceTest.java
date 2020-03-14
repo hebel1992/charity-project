@@ -29,10 +29,15 @@ class DonationServiceTest {
     CategoryService categoryService;
 
     @Test
-    void shouldSaveDonationsThenReturnProperBagsQuantity() {
+    void shouldSaveDonationsThenReturnProperValues() {
+
+        //GIVEN
+
         Institution institution = new Institution();
         institution.setName("Inst1");
         institution.setDescription("Description1");
+        institution.setCity("Szczecin");
+        institution.setPhoneNumber("3456513122");
 
         institutionService.saveInstitution(institution);
 
@@ -55,8 +60,6 @@ class DonationServiceTest {
         donation1.setInstitution(institution);
         donation1.setCategories(new HashSet<>(Arrays.asList(category)));
 
-        donationService.saveDonation(donation1);
-
         Donation donation2 = new Donation();
         donation2.setQuantity(6);
         donation2.setStreet("Mala 12");
@@ -68,6 +71,9 @@ class DonationServiceTest {
         donation2.setInstitution(institution);
         donation2.setCategories(new HashSet<>(Arrays.asList(category, category2)));
 
+        //WHEN
+
+        donationService.saveDonation(donation1);
         donationService.saveDonation(donation2);
 
         int countBags = 0;
@@ -75,8 +81,13 @@ class DonationServiceTest {
             countBags += d.getQuantity();
         }
 
+        //THEN
+
         Assertions.assertThat(countBags).isEqualTo(9);
         Assertions.assertThat(donation1.getCategories()).doesNotContain(category2);
         Assertions.assertThat(donation2.getCategories().size()).isEqualTo(2);
+        Assertions.assertThat(donation1.getInstitution()).isNotNull();
     }
+
+
 }

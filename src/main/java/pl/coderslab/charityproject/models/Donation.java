@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -69,4 +68,8 @@ public class Donation extends AbstractEntity {
     @JoinColumn(name = "institution_id")
     @ManyToOne
     private Institution institution;
+
+    @JoinColumn(name = "user_id")
+    @ManyToOne
+    private User user;
 }

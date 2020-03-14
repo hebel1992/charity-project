@@ -23,7 +23,7 @@ class LoginRegisterControllerTest {
 
     @Autowired
     public LoginRegisterControllerTest() {
-        System.setProperty("webdriver.chrome.driver", "/home/hebel/IntelliJ_Projects/GitRepos/charity-project/src/test/resources/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         webDriver = new ChromeDriver();
         username = "randomUser";
         password = "randomPass";

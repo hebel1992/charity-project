@@ -1,6 +1,7 @@
 package pl.coderslab.charityproject.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.coderslab.charityproject.models.Category;
+import pl.coderslab.charityproject.models.CurrentUser;
 import pl.coderslab.charityproject.models.Donation;
 import pl.coderslab.charityproject.models.Institution;
 import pl.coderslab.charityproject.services.CategoryService;
@@ -33,10 +35,13 @@ public class HomePageController {
     }
 
     @PostMapping("/donate-execute")
-    public String donateActionExecute(@ModelAttribute("donation") @Valid Donation donation, BindingResult bindingResult) {
+    public String donateActionExecute(@AuthenticationPrincipal CurrentUser currentUser,
+                                      @ModelAttribute("donation") @Valid Donation donation, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "form";
         }
+
+        donation.setUser(currentUser.getUser());
         donationService.saveDonation(donation);
 
         return "redirect:home?formSuccess=true";
@@ -51,4 +56,5 @@ public class HomePageController {
     public List<Category> getCategories() {
         return categoryService.findAll();
     }
+
 }

@@ -18,4 +18,6 @@ public interface UserService {
     void deleteUser(User user);
 
     List<User> findAdmins();
+
+    List<User> findUsers();
 }

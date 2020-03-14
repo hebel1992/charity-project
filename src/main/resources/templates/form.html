@@ -95,7 +95,7 @@
             <div data-step="1" class="active">
                 <h3 id="error-msg-place">Zaznacz co chcesz oddać:</h3>
                 <p class="error-message" th:if="${#fields.hasErrors('categories')}" th:errors="*{categories}"></p>
-                <div style="font-size: 25px" class="form-group" th:each="category: ${categories}">
+                <div style="font-size: 25px" class="form-group " th:each="category: ${categories}">
                     <label>
                         <input style="height: 20px"
                                name="categories"
