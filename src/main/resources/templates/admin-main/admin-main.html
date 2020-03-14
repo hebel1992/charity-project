@@ -8,7 +8,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>Panel Administratora</title>
-    <link th:href="@{css/admin-style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/admin-style.css}" rel="stylesheet"/>
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
           crossorigin="anonymous"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
@@ -16,11 +16,11 @@
 </head>
 <body class="sb-nav-fixed">
 
-<div th:include="/admin/admin-header.html"></div>
+<div th:include="admin-main/admin-header.html"></div>
 
 <div id="layoutSidenav">
 
-    <div th:include="/admin/admin-sidenav.html"></div>
+    <div th:include="admin-main/admin-sidenav.html"></div>
 
     <div id="layoutSidenav_content">
         <main>
@@ -557,7 +557,7 @@
             </div>
         </main>
 
-        <div th:include="/admin/admin-footer.html"></div>
+        <div th:include="admin-main/admin-footer.html"></div>
 
     </div>
 </div>

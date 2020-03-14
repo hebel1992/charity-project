@@ -75,22 +75,18 @@
 
     <!-- SLIDE 1 -->
     <div class="help--slides active" data-id="1">
-        <p>W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi współpracujemy.
+        <p style="margin-bottom: 50px">W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi
+            współpracujemy.
             Możesz sprawdzić czym się zajmują.</p>
-        <ul class="help--slides-items">
-            <li>
-                <div class="col" th:each="institution, iterStat: ${institutions}" th:if="${iterStat.index%2==0}">
-                    <div class="title" th:text="'Fundacja ' + ${institution.name}"></div>
-                    <div class="subtitle" th:text="'Cel i misja: ' + ${institution.description}"></div>
-                </div>
-            </li>
-            <li>
-                <div class="col" th:each="institution, iterStat: ${institutions}" th:if="${iterStat.index%2!=0}">
-                    <div class="title" th:text="'Fundacja ' + ${institution.name}"></div>
-                    <div class="subtitle" th:text="'Cel i misja: ' + ${institution.description}"></div>
-                </div>
-            </li>
-        </ul>
+
+        <div class="institution" th:each="institution, iterStat: ${institutions}"
+             th:style="${iterStat.index%2==0 ? 'text-align: right; float:right' : 'float:left'}">
+            <div class="title" th:text="'Fundacja ' + ${institution.name}"></div>
+            <div class="subtitle" th:text="'Cel i misja: ' + ${institution.description}"></div>
+            <div style="margin-top: 20px"></div>
+            <hr th:style="${iterStat.index%2==0 ? 'width:60%; margin-right:0' : 'width:60%; margin-left:0'}">
+        </div>
+
     </div>
 </section>
 

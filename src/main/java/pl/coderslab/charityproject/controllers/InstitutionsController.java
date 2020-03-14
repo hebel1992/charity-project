@@ -12,6 +12,7 @@ import pl.coderslab.charityproject.models.Institution;
 import pl.coderslab.charityproject.services.InstitutionService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,6 +20,11 @@ import javax.validation.Valid;
 public class InstitutionsController {
 
     private final InstitutionService institutionService;
+
+    @RequestMapping("/institutions")
+    public String institutionsList() {
+        return "/institutions/institutions-list";
+    }
 
     @RequestMapping("/delete-institution/{instId}")
     public String deleteInstitutionAction(@PathVariable("instId") Long instId) {
@@ -32,13 +38,13 @@ public class InstitutionsController {
     public String editInstitution(Model model, @PathVariable("instId") Long instId) {
         Institution institution = institutionService.findById(instId);
         model.addAttribute("institution", institution);
-        return "/admin/edit-institution";
+        return "/institutions/edit-institution";
     }
 
     @PostMapping("/edit-institution-action")
     public String editInstitutionAction(@ModelAttribute("institution") @Valid Institution institution, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/admin/edit-institution";
+            return "/institutions/edit-institution";
         }
         institutionService.saveInstitution(institution);
 
@@ -48,16 +54,22 @@ public class InstitutionsController {
     @RequestMapping("/add-institution")
     public String addInstitution(Model model) {
         model.addAttribute("institution", new Institution());
-        return "/admin/add-institution";
+        return "/institutions/add-institution";
     }
 
     @PostMapping("/add-institution-action")
     public String addInstitutionAction(@ModelAttribute("institution") @Valid Institution institution, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/admin/add-institution";
+            return "/institutions/add-institution";
         }
         institutionService.saveInstitution(institution);
 
         return "redirect:/admin/institutions";
     }
+
+    @ModelAttribute("institutions")
+    public List<Institution> institutions() {
+        return institutionService.findAll();
+    }
+
 }

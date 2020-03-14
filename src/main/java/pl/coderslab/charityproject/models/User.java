@@ -44,7 +44,7 @@ public class User {
     private String username;
 
     @NotNull
-    @Size(min = 8, message = "min 8 characters")
+    @Size(min = 8, message = "min 8 znaków")
     @Column(name = "password")
     private String password;
 

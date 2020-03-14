@@ -16,17 +16,17 @@
 </head>
 <body class="sb-nav-fixed">
 
-<div th:include="/admin/admin-header.html"></div>
+<div th:include="admin-main/admin-header.html"></div>
 
 <div id="layoutSidenav">
 
-    <div th:include="/admin/admin-sidenav.html"></div>
+    <div th:include="admin-main/admin-sidenav.html"></div>
 
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
 
-                <div th:include="/admin/admin-sub-header.html"></div>
+                <div th:include="admin-main/admin-sub-header.html"></div>
 
                 <div class="card mb-4">
                     <div class="card-header"><i class="fas fa-table mr-1"></i>Edycja Fundacji</div>
@@ -63,7 +63,7 @@
             </div>
         </main>
 
-        <div th:include="/admin/admin-footer.html"></div>
+        <div th:include="admin-main/admin-footer.html"></div>
 
     </div>
 </div>
