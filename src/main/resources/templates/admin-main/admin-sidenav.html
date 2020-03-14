@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+        <div class="sb-sidenav-menu">
+            <div class="nav">
+                <div class="sb-sidenav-menu-heading">Nawigacja</div>
+                <a class="nav-link" th:href="@{/admin}"
+                >
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Strona główna</a
+                >
+
+                <a class="nav-link" th:href="@{/admin/institutions}"
+                >
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Fundacje</a
+                >
+
+                <a class="nav-link" th:href="@{/admin/admins}"
+                >
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Administratorzy</a
+                >
+
+                <a class="nav-link" th:href="@{/admin}"
+                >
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Użytkownicy</a
+                >
+
+                <a class="nav-link" th:href="@{/admin}"
+                >
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Przekazane dary</a
+                >
+
+                <a class="nav-link" th:href="@{/admin}"
+                >
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Kategorie darów</a
+                >
+
+            </div>
+        </div>
+        <div class="sb-sidenav-footer">
+            <div class="small">Zalogowany jako:</div>
+            <span sec:authentication="principal.username"></span>
+        </div>
+    </nav>
+</div>

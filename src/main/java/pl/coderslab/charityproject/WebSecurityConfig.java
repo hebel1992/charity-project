@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import pl.coderslab.charityproject.services.SpringDataUserDetailsService;
 
 @Configuration
@@ -16,6 +17,7 @@ import pl.coderslab.charityproject.services.SpringDataUserDetailsService;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @ComponentScan({"pl.coderslab.charityproject"})
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -33,15 +35,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder());
     }
 
+    @Bean
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
+        return new MyUrlAuthenticationSuccessHandler();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.
                 authorizeRequests()
                 .antMatchers("/", "/login", "/register").permitAll()
-                .antMatchers("/home").authenticated()
+                .antMatchers("/home").hasRole("USER")
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .and().formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/home?formSuccess=false")
+                .successHandler(myAuthenticationSuccessHandler())
                 .failureUrl("/login-error")
                 .and()
                 .logout().logoutSuccessUrl("/");
