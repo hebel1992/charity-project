@@ -13,6 +13,8 @@ public interface UserService {
 
     void saveUser(User user);
 
+    void saveWithoutRoles(User user);
+
     void saveAdmin(User admin);
 
     void deleteUser(User user);

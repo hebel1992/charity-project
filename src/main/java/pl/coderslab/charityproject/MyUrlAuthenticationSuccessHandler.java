@@ -60,7 +60,7 @@ public class MyUrlAuthenticationSuccessHandler implements AuthenticationSuccessH
         } else if (isAdmin) {
             return "/admin";
         } else {
-            throw new IllegalStateException();
+            return "/login?disabled=true";
         }
     }
 

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.coderslab.charityproject.validationGroups.EditedUser;
 import pl.coderslab.charityproject.validators.UniqueEmail;
 import pl.coderslab.charityproject.validators.UniqueUsername;
 
@@ -12,6 +13,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.groups.Default;
 import java.util.List;
 import java.util.Set;
 
@@ -25,33 +27,36 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Size(min = 3, max = 15, message = "min 3, max 15 znaków")
+    @NotNull(groups = {Default.class, EditedUser.class})
+    @Size(min = 3, max = 15, message = "min 3, max 15 znaków", groups = {Default.class, EditedUser.class})
     @Column(name = "first_name")
     private String firstName;
 
-    @NotNull
-    @Size(min = 2, max = 15, message = "min 2, max 15 znaków")
+    @NotNull(groups = {Default.class, EditedUser.class})
+    @Size(min = 2, max = 15, message = "min 2, max 15 znaków", groups = {Default.class, EditedUser.class})
     @Column(name = "last_name")
     private String lastName;
 
-    @NotNull
-    @NotBlank(message = "pole nie może być puste")
-    @Email
-    @UniqueEmail
+    @NotNull(groups = {Default.class, EditedUser.class})
+    @NotBlank(message = "pole nie może być puste", groups = {Default.class, EditedUser.class})
+    @Email(groups = {Default.class, EditedUser.class})
+    @UniqueEmail(groups = {Default.class})
     @Column(name = "email", unique = true)
     private String email;
 
-    @NotNull
-    @UniqueUsername
-    @Size(min = 8, max = 15, message = "min 8, max 15 znaków")
+    @NotNull(groups = {Default.class, EditedUser.class})
+    @UniqueUsername(groups = {Default.class})
+    @Size(min = 8, max = 15, message = "min 8, max 15 znaków", groups = {Default.class, EditedUser.class})
     @Column(name = "username", unique = true)
     private String username;
 
-    @NotNull
-    @Size(min = 8, message = "min 8 znaków")
+    @NotNull(groups = {Default.class, EditedUser.class})
+    @Size(min = 8, message = "min 8 znaków", groups = {Default.class, EditedUser.class})
     @Column(name = "password")
     private String password;
+
+    @Column(name = "blocked")
+    private Boolean blocked;
 
     private int enabled;
 

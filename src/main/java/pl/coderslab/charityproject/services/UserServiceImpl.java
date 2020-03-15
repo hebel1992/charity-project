@@ -45,6 +45,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void saveWithoutRoles(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setEnabled(1);
+        user.setRoles(new HashSet<Role>(Arrays.asList()));
+        userRepository.save(user);
+    }
+
+    @Override
     public void saveAdmin(User admin) {
         admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         admin.setEnabled(1);
@@ -60,11 +68,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAdmins() {
-       return userRepository.findByRoles_Id(1L);
+        return userRepository.findByRoles_Id(1L);
     }
 
     @Override
     public List<User> findUsers() {
-        return userRepository.findByRoles_Id(2L);
+        List<User> allUsers = userRepository.findByRoles_Id(2L);
+        List<User> blockedUsers = userRepository.findBlockedUsers();
+
+        allUsers.addAll(blockedUsers);
+
+        return allUsers;
     }
 }

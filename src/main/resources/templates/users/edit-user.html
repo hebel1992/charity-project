@@ -67,6 +67,12 @@
                                     <span class="error-message" th:if="${passNoMatch}">Nieprawidłowe powtórzenie hasła</span>
                                 </div>
                             </div>
+
+                            <div class="custom-control custom-checkbox" style="margin-bottom: 20px">
+                                <input th:field="*{blocked}" th:name="block-user" th:type="checkbox" class="custom-control-input" id="block-user">
+                                <label class="custom-control-label" for="block-user">Zablokuj użytkownika</label>
+                            </div>
+
                             <button type="submit" class="btn btn-primary">Wprowadź zmiany</button>
                             <a type="button" th:href="@{/admin/users}" class="btn btn-primary">Wróć</a>
                         </form>

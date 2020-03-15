@@ -1,7 +1,7 @@
-INSERT INTO user (email, enabled, first_name, last_name, password, username) VALUES ('b.kowal@wp.pl', 1, 'Bartosz', 'Kowalski', '$2a$10$vDXXSvQzoHKDvPwcP4cQt.IIA.GAA0raTAWPLMBrZ3/CfVW0vr4oC', 'testuser');
-INSERT INTO user (email, enabled, first_name, last_name, password, username) VALUES ('m.halas@o2.pl', 1, 'Michał', 'Hałaś', '$2a$10$h8DEAw7CVSellRjD7JwsBeBawdmcnveaVcfThbQ0Li1UZFA6/NQQi', 'testuser1');
-INSERT INTO user (email, enabled, first_name, last_name, password, username) VALUES ('g.mazur@gmail.com', 1, 'Grzegorz', 'Mazur', '$2a$10$pmwgKP4.p5ha80BFzH2Nk.r92oNDsN/s0/5uTX.Uo6rAPSEkMk6DO', 'testuser2');
-INSERT INTO user (email, enabled, first_name, last_name, password, username) VALUES ('n.krych@onet.pl', 1, 'Natalia', 'Krychowiak', '$2a$10$xiiBJgFIM8VURK5HNBUAnOr.2QLT7ex0GiKOXjPBM6OLuvN7FO1pC', 'testuser3');
+INSERT INTO user (email, enabled, first_name, last_name, password, username, blocked) VALUES ('b.kowal@wp.pl', 1, 'Bartosz', 'Kowalski', '$2a$10$vDXXSvQzoHKDvPwcP4cQt.IIA.GAA0raTAWPLMBrZ3/CfVW0vr4oC', 'testuser', false);
+INSERT INTO user (email, enabled, first_name, last_name, password, username, blocked) VALUES ('m.halas@o2.pl', 1, 'Michał', 'Hałaś', '$2a$10$h8DEAw7CVSellRjD7JwsBeBawdmcnveaVcfThbQ0Li1UZFA6/NQQi', 'testuser1', false);
+INSERT INTO user (email, enabled, first_name, last_name, password, username, blocked) VALUES ('g.mazur@gmail.com', 1, 'Grzegorz', 'Mazur', '$2a$10$pmwgKP4.p5ha80BFzH2Nk.r92oNDsN/s0/5uTX.Uo6rAPSEkMk6DO', 'testuser2', false);
+INSERT INTO user (email, enabled, first_name, last_name, password, username, blocked) VALUES ('n.krych@onet.pl', 1, 'Natalia', 'Krychowiak', '$2a$10$xiiBJgFIM8VURK5HNBUAnOr.2QLT7ex0GiKOXjPBM6OLuvN7FO1pC', 'testuser3', true);
 
 INSERT INTO role (id, name, description) VALUES (1, 'ROLE_ADMIN', 'Admin');
 INSERT INTO role (id, name, description) VALUES (2, 'ROLE_USER', 'User');
@@ -9,7 +9,6 @@ INSERT INTO role (id, name, description) VALUES (2, 'ROLE_USER', 'User');
 INSERT INTO user_role (user_id, role_id) VALUES (1,2);
 INSERT INTO user_role (user_id, role_id) VALUES (2,2);
 INSERT INTO user_role (user_id, role_id) VALUES (3,2);
-INSERT INTO user_role (user_id, role_id) VALUES (4,2);
 
 INSERT INTO user (email, enabled, first_name, last_name, password, username) VALUES ('i.sowa.o2.pl', 1, 'Ilona', 'Sowa', '$2a$10$ssLUf7WmudX9ZT9jzSBrUuS4jt/zXimoqDfqYI2S8PUiVOOlW1U16', 'testadmin');
 INSERT INTO user (email, enabled, first_name, last_name, password, username) VALUES ('m.gora@wp.pl', 1, 'Marta', 'Góra', '$2a$10$oLSTrxC5pP3tCryj3PazPeXao.7iFfVSsihzH5b3SdaA9WBz03lte', 'testadmin1');

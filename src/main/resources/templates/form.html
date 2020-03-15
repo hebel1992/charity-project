@@ -13,7 +13,7 @@
     <nav class="container container--70">
         <ul class="nav--actions">
             <li class="logged-user">
-                <span>Witaj </span><span sec:authentication="principal.username"></span>
+                <span>Witaj </span><span sec:authentication="principal.user.firstName"></span>
                 <ul class="dropdown">
                     <li><a href="#">Profil</a></li>
                     <li><a href="#">Moje zbiórki</a></li>

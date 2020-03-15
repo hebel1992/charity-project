@@ -14,4 +14,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
 
     List<User> findByRoles_Id(Long id);
+
+    @Query("SELECT a FROM User a WHERE a.blocked=true")
+    List<User> findBlockedUsers();
 }

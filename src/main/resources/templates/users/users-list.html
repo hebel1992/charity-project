@@ -39,6 +39,7 @@
                                     <th>Imię</th>
                                     <th>Nazwisko</th>
                                     <th>Email</th>
+                                    <th>Blokada konta</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -49,6 +50,7 @@
                                     <td th:text="${user.firstName}"></td>
                                     <td th:text="${user.lastName}"></td>
                                     <td th:text="${user.email}"></td>
+                                    <td th:text="${user.blocked ? 'tak' : 'nie'}"></td>
                                     <td style="text-align: center"><a
                                             th:href="@{'/admin/edit-user/' + ${user.id}}">
                                         <i class="fas fa-edit"></i></a></td>

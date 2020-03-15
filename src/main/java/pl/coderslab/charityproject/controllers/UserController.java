@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charityproject.models.User;
 import pl.coderslab.charityproject.services.UserService;
+import pl.coderslab.charityproject.validationGroups.EditedUser;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -40,7 +42,7 @@ public class UserController {
 
     @PostMapping("/edit-user-action")
     public String editUserAction(Model model, @RequestParam("password2") String pass2,
-                                        @ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+                                 @ModelAttribute("user") @Validated({EditedUser.class}) User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/users/edit-user";
         }
@@ -50,7 +52,11 @@ public class UserController {
             return "/users/add-user";
         }
 
-        userService.saveAdmin(user);
+        if (!user.getBlocked()) {
+            userService.saveUser(user);
+        } else {
+            userService.saveWithoutRoles(user);
+        }
 
         return "redirect:/admin/users";
     }
@@ -63,7 +69,7 @@ public class UserController {
 
     @PostMapping("/add-user-action")
     public String addUserAction(Model model, @RequestParam("password2") String pass2,
-                                 @ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+                                @ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/users/add-user";
         }
@@ -73,6 +79,7 @@ public class UserController {
             return "/users/add-user";
         }
 
+        user.setBlocked(false);
         userService.saveUser(user);
 
         model.addAttribute("passNoMatch", false);

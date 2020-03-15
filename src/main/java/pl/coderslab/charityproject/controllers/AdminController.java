@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charityproject.models.User;
 import pl.coderslab.charityproject.services.UserService;
+import pl.coderslab.charityproject.validationGroups.EditedUser;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -45,7 +47,7 @@ public class AdminController {
 
     @PostMapping("/edit-admin-action")
     public String editAdminAction(Model model, @RequestParam("password2") String pass2,
-                                        @ModelAttribute("admin") @Valid User admin, BindingResult bindingResult) {
+                                  @ModelAttribute("admin") @Validated({EditedUser.class}) User admin, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/admins/edit-admin";
         }
