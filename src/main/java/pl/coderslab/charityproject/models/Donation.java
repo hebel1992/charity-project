@@ -5,10 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.coderslab.charityproject.validators.MyTime;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Set;
@@ -36,21 +36,23 @@ public class Donation extends AbstractEntity {
     private String city;
 
     @NotNull
-    @Size(min = 8, max = 10, message = "min 8, max 10 znaków")
+    @Pattern(regexp="[\\d]{8,10}", message = "min 8, max 10 cyfr")
     @Column(name = "phone_number")
     private String phoneNumber;
 
     @NotNull
-    @Size(min = 3, message = "min 5 znaków")
+    @Pattern(regexp="[\\d]{2}-[\\d]{3}", message = "niepoprawny format")
     @Column(name = "zip_code")
     private String zipCode;
 
     @NotNull
+    @Future(message = "musi być data z przyszłości")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "pick_up_date")
     private LocalDate pickUpDate;
 
     @NotNull
+    @MyTime(minHour = 8, maxHour = 20)
     @Column(name = "pick_up_time")
     private LocalTime pickUpTime;
 

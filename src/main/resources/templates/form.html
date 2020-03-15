@@ -156,7 +156,7 @@
 
             <!-- STEP 4 -->
             <div data-step="4">
-                <h3>Podaj adres oraz termin odbioru rzecz przez kuriera:</h3>
+                <h3>Podaj adres oraz termin odbioru rzeczy przez kuriera:</h3>
 
                 <div class="form-section form-section--columns">
                     <div class="form-section--column">
@@ -174,7 +174,7 @@
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy <input id="zip-code" type="text" th:field="*{zipCode}"/>
+                                Kod pocztowy <input id="zip-code" type="text" th:field="*{zipCode}" placeholder="xx-xxx"/>
                             </label>
                             <span class="error-message" th:if="${#fields.hasErrors('zipCode')}"
                                   th:errors="*{zipCode}"></span>
