@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Register</title>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<header class="header--form-page">
+    <nav class="container container--70">
+        <ul class="nav--actions">
+            <li class="logged-user">
+                <span>Witaj </span><span sec:authentication="principal.user.firstName"></span>
+                <ul class="dropdown">
+                    <li><a th:href="@{/edit-account}">Profil</a></li>
+                    <li><a href="#">Moje zbiórki</a></li>
+                    <li><a href="javascript: document.logoutForm.submit()">Wyloguj</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+            <input hidden type="submit" value="Sign Out"/>
+        </form>
+
+        <ul>
+            <li><a th:href="@{'/home?formSuccess=false'}" class="btn btn--without-border active">Start</a></li>
+            <li><a id="steps" class="btn btn--without-border">O co chodzi?</a></li>
+            <li><a id="form" class="btn btn--without-border">Formularz</a></li>
+            <li><a id="contact" class="btn btn--without-border">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <section class="login-page">
+        <h2>Edycja konta</h2>
+        <form th:action="@{/edit-account-action}" method="post" th:object="${user}">
+
+            <input type="hidden" th:field="*{id}" th:value="${user.id}">
+
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Nazwa użytkownika" th:field="*{username}"/>
+                <span class="error-message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+            </div>
+            <div class="form-group">
+                <input type="text" name="first-name" placeholder="Imię" th:field="*{firstName}"/>
+                <span class="error-message" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+            </div>
+            <div class="form-group">
+                <input type="text" name="last-name" placeholder="Nazwisko" th:field="*{lastName}"/>
+                <span class="error-message" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+            </div>
+            <div class="form-group">
+                <input type="text" name="email" placeholder="Email" th:field="*{email}"/>
+                <span class="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </div>
+            <div class="form-group form-group--buttons">
+                <a th:href="@{/home?formSuccess=false}" class="btn btn--without-border">Powrót</a>
+                <button class="btn" type="submit">Zapisz</button>
+            </div>
+        </form>
+    </section>
+</header>
+
+<div th:include="footer.html"></div>
+</body>
+</html>

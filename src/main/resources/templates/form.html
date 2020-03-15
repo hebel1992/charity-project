@@ -15,7 +15,7 @@
             <li class="logged-user">
                 <span>Witaj </span><span sec:authentication="principal.user.firstName"></span>
                 <ul class="dropdown">
-                    <li><a href="#">Profil</a></li>
+                    <li><a th:href="@{/edit-account}">Profil</a></li>
                     <li><a href="#">Moje zbiórki</a></li>
                     <li><a href="javascript: document.logoutForm.submit()">Wyloguj</a></li>
                 </ul>

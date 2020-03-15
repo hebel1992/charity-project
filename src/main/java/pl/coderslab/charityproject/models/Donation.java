@@ -26,17 +26,17 @@ public class Donation extends AbstractEntity {
     private Integer quantity;
 
     @NotNull
-    @Size(min = 3, message = "min 3 znaki")
+    @Size(min = 3, message = "min. 3 znaki")
     @Column(name = "street")
     private String street;
 
     @NotNull
-    @Size(min = 3, message = "min 3 znaki")
+    @Size(min = 3, message = "min. 3 znaki")
     @Column(name = "city")
     private String city;
 
     @NotNull
-    @Pattern(regexp="[\\d]{8,10}", message = "min 8, max 10 cyfr")
+    @Pattern(regexp="[\\d]{8,10}", message = "8-10 cyfr")
     @Column(name = "phone_number")
     private String phoneNumber;
 

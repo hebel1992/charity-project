@@ -9,10 +9,7 @@ import pl.coderslab.charityproject.validators.UniqueEmail;
 import pl.coderslab.charityproject.validators.UniqueUsername;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import javax.validation.groups.Default;
 import java.util.List;
 import java.util.Set;
@@ -28,30 +25,31 @@ public class User {
     private Long id;
 
     @NotNull(groups = {Default.class, EditedUser.class})
-    @Size(min = 3, max = 15, message = "min 3, max 15 znaków", groups = {Default.class, EditedUser.class})
+    @Size(min = 3, max = 15, message = "3-15 znaków", groups = {Default.class, EditedUser.class})
     @Column(name = "first_name")
     private String firstName;
 
     @NotNull(groups = {Default.class, EditedUser.class})
-    @Size(min = 2, max = 15, message = "min 2, max 15 znaków", groups = {Default.class, EditedUser.class})
+    @Size(min = 2, max = 15, message = "2-15 znaków", groups = {Default.class, EditedUser.class})
     @Column(name = "last_name")
     private String lastName;
 
     @NotNull(groups = {Default.class, EditedUser.class})
     @NotBlank(message = "pole nie może być puste", groups = {Default.class, EditedUser.class})
     @Email(groups = {Default.class, EditedUser.class})
-    @UniqueEmail(groups = {Default.class})
+    @UniqueEmail
     @Column(name = "email", unique = true)
     private String email;
 
     @NotNull(groups = {Default.class, EditedUser.class})
-    @UniqueUsername(groups = {Default.class})
-    @Size(min = 8, max = 15, message = "min 8, max 15 znaków", groups = {Default.class, EditedUser.class})
+    @UniqueUsername
+    @Size(min = 8, max = 15, message = "8-15 znaków", groups = {Default.class, EditedUser.class})
     @Column(name = "username", unique = true)
     private String username;
 
-    @NotNull(groups = {Default.class, EditedUser.class})
-    @Size(min = 8, message = "min 8 znaków", groups = {Default.class, EditedUser.class})
+    @NotNull
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[\\!\\@\\#\\$\\%\\^\\&\\*\\(\\)\\_\\+\\-\\=])(?=.*[A-Z])(?!.*\\s).{8,}$",
+            message = "min. 8 znaków, musi zawierać: małą litere, dużą litere, cyfrę, znak specjalny [!@#$%^&*()_+-=]")
     @Column(name = "password")
     private String password;
 

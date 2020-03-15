@@ -35,7 +35,7 @@ public class AdminController {
     @RequestMapping("/delete-admin/{instId}")
     public String deleteAdminAction(Model model, @AuthenticationPrincipal CurrentUser currentUser,
                                     @PathVariable("instId") Long instId) {
-        if(currentUser.getUser().getId()==instId){
+        if (currentUser.getUser().getId() == instId) {
             model.addAttribute("stopDelete", "stopDelete");
             return "admins/admins-list";
         }
@@ -54,18 +54,15 @@ public class AdminController {
     }
 
     @PostMapping("/edit-admin-action")
-    public String editAdminAction(Model model, @RequestParam("password2") String pass2,
-                                  @ModelAttribute("admin") @Validated({EditedUser.class}) User admin, BindingResult bindingResult) {
+    public String editAdminAction(@ModelAttribute("admin") @Validated({EditedUser.class}) User admin,
+                                  BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/admins/edit-admin";
         }
 
-        if (!admin.getPassword().equals(pass2)) {
-            model.addAttribute("passNoMatch", true);
-            return "/admins/add-admin";
-        }
+        admin.setPassword(userService.findById(admin.getId()).getPassword());
 
-        userService.saveAdmin(admin);
+        userService.saveUser(admin, "admin", false);
 
         return "redirect:/admin/admins";
     }
@@ -88,7 +85,7 @@ public class AdminController {
             return "/admins/add-admin";
         }
 
-        userService.saveAdmin(admin);
+        userService.saveUser(admin, "admin", true);
 
         model.addAttribute("passNoMatch", false);
 

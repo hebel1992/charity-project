@@ -33,7 +33,7 @@ public class LoginRegisterController {
             return "register";
         }
 
-        userService.saveUser(user);
+        userService.saveUser(user, "user", true);
 
         model.addAttribute("passNoMatch", false);
 

@@ -41,21 +41,18 @@ public class UserController {
     }
 
     @PostMapping("/edit-user-action")
-    public String editUserAction(Model model, @RequestParam("password2") String pass2,
-                                 @ModelAttribute("user") @Validated({EditedUser.class}) User user, BindingResult bindingResult) {
+    public String editUserAction(@ModelAttribute("user") @Validated({EditedUser.class}) User user,
+                                 BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/users/edit-user";
         }
 
-        if (!user.getPassword().equals(pass2)) {
-            model.addAttribute("passNoMatch", true);
-            return "/users/add-user";
-        }
+        user.setPassword(userService.findById(user.getId()).getPassword());
 
         if (!user.getBlocked()) {
-            userService.saveUser(user);
+            userService.saveUser(user, "user", false);
         } else {
-            userService.saveWithoutRoles(user);
+            userService.saveUser(user, "noRole", false);
         }
 
         return "redirect:/admin/users";
@@ -80,7 +77,7 @@ public class UserController {
         }
 
         user.setBlocked(false);
-        userService.saveUser(user);
+        userService.saveUser(user, "user", true);
 
         model.addAttribute("passNoMatch", false);
 

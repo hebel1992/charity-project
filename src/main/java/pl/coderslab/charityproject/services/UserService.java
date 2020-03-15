@@ -11,11 +11,7 @@ public interface UserService {
 
     User findByEmail(String email);
 
-    void saveUser(User user);
-
-    void saveWithoutRoles(User user);
-
-    void saveAdmin(User admin);
+    void saveUser(User user, String role, Boolean encodePassword);
 
     void deleteUser(User user);
 

@@ -36,29 +36,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public void saveUser(User user, String role, Boolean encodePassword) {
+        if (encodePassword) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         user.setEnabled(1);
-        Role userRole = roleRepository.findByName("ROLE_USER");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        user.setBlocked(false);
+        if (role.equals("admin")) {
+            Role userRole = roleRepository.findByName("ROLE_ADMIN");
+            user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        } else if (role.equals("user")) {
+            Role userRole = roleRepository.findByName("ROLE_USER");
+            user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        } else {
+            user.setBlocked(true);
+            user.setRoles(new HashSet<Role>(Arrays.asList()));
+        }
         userRepository.save(user);
-    }
-
-    @Override
-    public void saveWithoutRoles(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setEnabled(1);
-        user.setRoles(new HashSet<Role>(Arrays.asList()));
-        userRepository.save(user);
-    }
-
-    @Override
-    public void saveAdmin(User admin) {
-        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
-        admin.setEnabled(1);
-        Role adminRole = roleRepository.findByName("ROLE_ADMIN");
-        admin.setRoles(new HashSet<Role>(Arrays.asList(adminRole)));
-        userRepository.save(admin);
     }
 
     @Override
