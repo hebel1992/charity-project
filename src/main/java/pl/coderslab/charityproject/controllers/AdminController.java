@@ -1,11 +1,13 @@
 package pl.coderslab.charityproject.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.charityproject.models.CurrentUser;
 import pl.coderslab.charityproject.models.User;
 import pl.coderslab.charityproject.services.UserService;
 import pl.coderslab.charityproject.validationGroups.EditedUser;
@@ -31,7 +33,13 @@ public class AdminController {
     }
 
     @RequestMapping("/delete-admin/{instId}")
-    public String deleteAdminAction(@PathVariable("instId") Long instId) {
+    public String deleteAdminAction(Model model, @AuthenticationPrincipal CurrentUser currentUser,
+                                    @PathVariable("instId") Long instId) {
+        if(currentUser.getUser().getId()==instId){
+            model.addAttribute("stopDelete", "stopDelete");
+            return "admins/admins-list";
+        }
+
         User admin = userService.findById(instId);
         userService.deleteUser(admin);
 

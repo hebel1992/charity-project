@@ -10223,3 +10223,9 @@ body {
     margin-top: -5px;
 }
 
+.cannot-delete-message{
+    color: red;
+    margin-left: 25%;
+    font-weight: bold;
+    font-size: 20px;
+}
