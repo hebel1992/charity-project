@@ -14,6 +14,7 @@ import pl.coderslab.charityproject.services.DonationService;
 import pl.coderslab.charityproject.services.InstitutionService;
 import pl.coderslab.charityproject.services.UserService;
 import pl.coderslab.charityproject.validationGroups.EditedUser;
+import pl.coderslab.charityproject.validationGroups.UserChangePassword;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -28,9 +29,11 @@ public class HomePageController {
     private final BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/home")
-    public String donateAction(Model model, @RequestParam("formSuccess") Boolean success) {
+    public String donateAction(Model model, @RequestParam("formSuccess") Boolean success,
+                               @RequestParam("passwordChanged") Boolean passwordChanged) {
         model.addAttribute("donation", new Donation());
         model.addAttribute("formSuccess", success);
+        model.addAttribute("passwordChanged", passwordChanged);
         return "form";
     }
 
@@ -44,19 +47,19 @@ public class HomePageController {
         donation.setUser(currentUser.getUser());
         donationService.saveDonation(donation);
 
-        return "redirect:home?formSuccess=true";
+        return "redirect:home?formSuccess=true$passwordChanged=false";
     }
 
     @RequestMapping("/edit-account")
-    public String editAccount(Model model, @AuthenticationPrincipal CurrentUser currentUser){
+    public String editAccount(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
         model.addAttribute("user", currentUser.getUser());
         return "edit-account";
     }
 
     @PostMapping("/edit-account-action")
     public String editAccountAction(@AuthenticationPrincipal CurrentUser currentUser,
-                                    @ModelAttribute("user") @Validated({EditedUser.class})User user, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
+                                    @ModelAttribute("user") @Validated({EditedUser.class}) User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return "edit-account";
         }
 
@@ -64,7 +67,40 @@ public class HomePageController {
 
         userService.saveUser(user, "user", false);
 
-        return "redirect:home?formSuccess=false";
+        return "redirect:home?formSuccess=false$passwordChanged=false";
+    }
+
+
+    @RequestMapping("/change-password/{userId}")
+    public String changePassword(Model model, @PathVariable("userId") Long instId) {
+        User user = userService.findById(instId);
+        model.addAttribute("user", user);
+        return "change-password";
+    }
+
+    @PostMapping("/change-password-action")
+    public String changePasswordAction(Model model, @AuthenticationPrincipal CurrentUser currentUser, @RequestParam("password2") String pass2,
+                                       @RequestParam("oldPassword") String oldPassword,
+                                       @ModelAttribute("user") @Validated({UserChangePassword.class}) User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "change-password";
+        }
+
+        if (!user.getPassword().equals(pass2)) {
+            model.addAttribute("passNoMatch", true);
+            return "change-password";
+        }
+
+        if (!passwordEncoder.matches(oldPassword, currentUser.getUser().getPassword())) {
+            model.addAttribute("wrongOldPass", true);
+            return "change-password";
+        }
+
+        model.addAttribute("passwordChanged", true);
+
+        userService.saveUser(user, "user", true);
+
+        return "redirect:home?formSuccess=false&passwordChanged=true";
     }
 
     @ModelAttribute("institutions")

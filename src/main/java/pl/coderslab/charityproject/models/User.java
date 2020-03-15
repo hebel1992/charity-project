@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.coderslab.charityproject.validationGroups.EditedUser;
+import pl.coderslab.charityproject.validationGroups.UserChangePassword;
 import pl.coderslab.charityproject.validators.UniqueEmail;
 import pl.coderslab.charityproject.validators.UniqueUsername;
 
@@ -47,9 +48,10 @@ public class User {
     @Column(name = "username", unique = true)
     private String username;
 
-    @NotNull
+    @NotNull(groups = {Default.class, UserChangePassword.class})
     @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[\\!\\@\\#\\$\\%\\^\\&\\*\\(\\)\\_\\+\\-\\=])(?=.*[A-Z])(?!.*\\s).{8,}$",
-            message = "min. 8 znaków, musi zawierać: małą litere, dużą litere, cyfrę, znak specjalny [!@#$%^&*()_+-=]")
+            message = "min. 8 znaków, musi zawierać: małą litere, dużą litere, cyfrę, znak specjalny [!@#$%^&*()_+-=]",
+            groups = {Default.class, UserChangePassword.class})
     @Column(name = "password")
     private String password;
 
