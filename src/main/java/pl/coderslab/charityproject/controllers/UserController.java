@@ -31,7 +31,7 @@ public class UserController {
         User user = userService.findById(instId);
         userService.deleteUser(user);
 
-        return "redirect:/admin/users";
+        return "redirect:admin/users";
     }
 
     @RequestMapping("/edit-user/{userId}")
@@ -58,7 +58,7 @@ public class UserController {
             userService.saveUser(user, "noRole", false);
         }
 
-        return "redirect:/admin/users";
+        return "redirect:admin/users";
     }
 
     @RequestMapping("/change-user-password/{userId}")
@@ -83,7 +83,7 @@ public class UserController {
 
         userService.saveUser(user, "user", true);
 
-        return "redirect:/admin/edit-user/" + user.getId() + "?passwordChanged=yes";
+        return "redirect:admin/edit-user/" + user.getId() + "?passwordChanged=yes";
     }
 
     @RequestMapping("/add-user")
@@ -109,7 +109,7 @@ public class UserController {
 
         model.addAttribute("passNoMatch", false);
 
-        return "redirect:/admin/users";
+        return "redirect:admin/users";
     }
 
     @ModelAttribute("users")

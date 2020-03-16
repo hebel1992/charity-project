@@ -31,7 +31,7 @@ public class InstitutionsController {
         Institution institution = institutionService.findById(instId);
         institutionService.deleteInstitution(institution);
 
-        return "redirect:/admin/institutions";
+        return "redirect:admin/institutions";
     }
 
     @RequestMapping("/edit-institution/{instId}")
@@ -48,7 +48,7 @@ public class InstitutionsController {
         }
         institutionService.saveInstitution(institution);
 
-        return "redirect:/admin/institutions";
+        return "redirect:admin/institutions";
     }
 
     @RequestMapping("/add-institution")
@@ -64,7 +64,7 @@ public class InstitutionsController {
         }
         institutionService.saveInstitution(institution);
 
-        return "redirect:/admin/institutions";
+        return "redirect:admin/institutions";
     }
 
     @ModelAttribute("institutions")
