@@ -13,7 +13,7 @@ public class CharityProjectApplication {
     @Primary
     public PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
         PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
-        configurer.setLocation(new ClassPathResource("app.properties"));
+        configurer.setLocation(new ClassPathResource("application.properties"));
         configurer.setFileEncoding("UTF-8");
         return configurer;
     }
