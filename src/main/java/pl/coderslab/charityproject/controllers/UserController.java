@@ -40,14 +40,14 @@ public class UserController {
         User user = userService.findById(instId);
         model.addAttribute("user", user);
         model.addAttribute("passwordChanged", passwordChanged);
-        return "/admin-users/edit-user";
+        return "admin-users/edit-user";
     }
 
     @PostMapping("/edit-user-action")
     public String editUserAction(@ModelAttribute("user") @Validated({EditedUser.class}) User user,
                                  BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/admin-users/edit-user";
+            return "admin-users/edit-user";
         }
 
         user.setPassword(userService.findById(user.getId()).getPassword());
@@ -65,7 +65,7 @@ public class UserController {
     public String changeUserPassword(Model model, @PathVariable("userId") Long instId) {
         User user = userService.findById(instId);
         model.addAttribute("user", user);
-        return "/admin-users/change-user-password";
+        return "admin-users/change-user-password";
     }
 
     @PostMapping("/change-user-password-action")
@@ -73,12 +73,12 @@ public class UserController {
                                            @ModelAttribute("user") @Validated({UserChangePassword.class}) User user,
                                            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/admin-users/change-user-password";
+            return "admin-users/change-user-password";
         }
 
         if (!user.getPassword().equals(pass2)) {
             model.addAttribute("passNoMatch", true);
-            return "/admin-users/change-user-password";
+            return "admin-users/change-user-password";
         }
 
         userService.saveUser(user, "user", true);
@@ -89,19 +89,19 @@ public class UserController {
     @RequestMapping("/add-user")
     public String addUser(Model model) {
         model.addAttribute("user", new User());
-        return "/admin-users/add-user";
+        return "admin-users/add-user";
     }
 
     @PostMapping("/add-user-action")
     public String addUserAction(Model model, @RequestParam("password2") String pass2,
                                 @ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/admin-users/add-user";
+            return "admin-users/add-user";
         }
 
         if (!user.getPassword().equals(pass2)) {
             model.addAttribute("passNoMatch", true);
-            return "/admin-users/add-user";
+            return "admin-users/add-user";
         }
 
         user.setBlocked(false);

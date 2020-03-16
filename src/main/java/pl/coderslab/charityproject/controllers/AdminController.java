@@ -29,7 +29,7 @@ public class AdminController {
 
     @RequestMapping("/admins")
     public String adminsList() {
-        return "/admin-admins/admins-list";
+        return "admin-admins/admins-list";
     }
 
     @RequestMapping("/delete-admin/{instId}")
@@ -50,14 +50,14 @@ public class AdminController {
     public String editAdmin(Model model, @PathVariable("adminId") Long instId) {
         User admin = userService.findById(instId);
         model.addAttribute("admin", admin);
-        return "/admin-admins/edit-admin";
+        return "admin-admins/edit-admin";
     }
 
     @PostMapping("/edit-admin-action")
     public String editAdminAction(@ModelAttribute("admin") @Validated({EditedUser.class}) User admin,
                                   BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/admin-admins/edit-admin";
+            return "admin-admins/edit-admin";
         }
 
         admin.setPassword(userService.findById(admin.getId()).getPassword());
@@ -70,19 +70,19 @@ public class AdminController {
     @RequestMapping("/add-admin")
     public String addAdmin(Model model) {
         model.addAttribute("admin", new User());
-        return "/admin-admins/add-admin";
+        return "admin-admins/add-admin";
     }
 
     @PostMapping("/add-admin-action")
     public String addAdminAction(Model model, @RequestParam("password2") String pass2,
                                  @ModelAttribute("admin") @Valid User admin, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/admin-admins/add-admin";
+            return "admin-admins/add-admin";
         }
 
         if (!admin.getPassword().equals(pass2)) {
             model.addAttribute("passNoMatch", true);
-            return "/admin-admins/add-admin";
+            return "admin-admins/add-admin";
         }
 
         userService.saveUser(admin, "admin", true);
