@@ -38,7 +38,7 @@ public class LoginRegisterController {
 
         model.addAttribute("passNoMatch", false);
 
-        return "redirect:login?accountCreated=yes";
+        return "redirect:/login?accountCreated=yes";
     }
 
     @GetMapping("/login")

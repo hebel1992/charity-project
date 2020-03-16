@@ -49,7 +49,7 @@ public class HomePageController {
         donation.setUser(currentUser.getUser());
         donationService.saveDonation(donation);
 
-        return "redirect:home?formSuccess=yes";
+        return "redirect:/home?formSuccess=yes";
     }
 
     @RequestMapping("/edit-account")
@@ -69,7 +69,7 @@ public class HomePageController {
 
         userService.saveUser(user, "user", false);
 
-        return "redirect:home?accountUpdated=yes";
+        return "redirect:/home?accountUpdated=yes";
     }
 
 
@@ -102,7 +102,7 @@ public class HomePageController {
 
         userService.saveUser(user, "user", true);
 
-        return "redirect:home?passwordChanged=yes";
+        return "redirect:/home?passwordChanged=yes";
     }
 
     @ModelAttribute("institutions")
