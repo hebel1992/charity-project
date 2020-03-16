@@ -21,7 +21,7 @@ import java.util.Set;
 @Table(name = "donations")
 public class Donation extends AbstractEntity {
 
-    @NotNull(message = "pole nie może być puste")
+    @NotNull
     @Column(name = "quantity")
     private Integer quantity;
 
