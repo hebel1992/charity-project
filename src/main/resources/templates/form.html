@@ -336,6 +336,27 @@
             });
         })
 
+        if (window.location.href.indexOf("#steps") > -1) {
+            $('html, body').animate({
+                scrollTop: $('.slogan--item').offset().top
+            }, 800, function () {
+            });
+        }
+
+        if (window.location.href.indexOf("#form") > -1) {
+            $('html, body').animate({
+                scrollTop: $('.form--steps').offset().top
+            }, 800, function () {
+            });
+        }
+
+        if (window.location.href.indexOf("#contact") > -1) {
+            $('html, body').animate({
+                scrollTop: $('.contact').offset().top
+            }, 800, function () {
+            });
+        }
+
         if ($('.error-message').length) {
             $('html, body').animate({
                 scrollTop: $('.form--steps-container').offset().top
