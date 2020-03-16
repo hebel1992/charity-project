@@ -28,7 +28,7 @@
         </form>
 
         <ul>
-            <li><a th:href="@{'/home?formSuccess=false'}" class="btn btn--without-border active">Start</a></li>
+            <li><a th:href="@{/home}" class="btn btn--without-border active">Start</a></li>
             <li><a id="steps" class="btn btn--without-border">O co chodzi?</a></li>
             <li><a id="form" class="btn btn--without-border">Formularz</a></li>
             <li><a id="contact" class="btn btn--without-border">Kontakt</a></li>
@@ -58,7 +58,7 @@
                 <span class="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
             </div>
             <div class="form-group form-group--buttons">
-                <a th:href="@{/home?formSuccess=false&passwordChanged=false}" class="btn btn--without-border">Powrót</a>
+                <a th:href="@{/home}" class="btn btn--without-border">Powrót</a>
                 <a th:href="@{'/change-password/' + ${user.id}}" class="btn btn--without-border">Zmień hasło</a>
                 <button class="btn" type="submit">Zapisz</button>
             </div>

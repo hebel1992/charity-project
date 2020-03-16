@@ -56,7 +56,7 @@ public class MyUrlAuthenticationSuccessHandler implements AuthenticationSuccessH
         }
 
         if (isUser) {
-            return "/home?formSuccess=false&passwordChanged=false";
+            return "/home";
         } else if (isAdmin) {
             return "/admin";
         } else {

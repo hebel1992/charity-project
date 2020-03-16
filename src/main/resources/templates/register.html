@@ -34,11 +34,11 @@
             <span class="error-message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
         </div>
         <div class="form-group">
-            <input type="text" name="first-name" placeholder="Imię" th:field="*{firstName}"/>
+            <input type="text" name="firstName" placeholder="Imię" th:field="*{firstName}"/>
             <span class="error-message" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
         </div>
         <div class="form-group">
-            <input type="text" name="last-name" placeholder="Nazwisko" th:field="*{lastName}"/>
+            <input type="text" name="lastName" placeholder="Nazwisko" th:field="*{lastName}"/>
             <span class="error-message" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
         </div>
         <div class="form-group">
@@ -55,7 +55,7 @@
         </div>
         <div class="form-group form-group--buttons">
             <a th:href="@{/login}" class="btn btn--without-border">Zaloguj się</a>
-            <button class="btn" type="submit">Załóż konto</button>
+            <button name="create" class="btn" type="submit">Załóż konto</button>
         </div>
     </form>
 </section>

@@ -23,7 +23,8 @@ public class LoginRegisterController {
     }
 
     @PostMapping("/register-action")
-    public String registerAction(Model model, @RequestParam("password2") String pass2, @ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+    public String registerAction(Model model, @RequestParam("password2") String pass2,
+                                 @ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "register";
         }
@@ -37,12 +38,13 @@ public class LoginRegisterController {
 
         model.addAttribute("passNoMatch", false);
 
-        return "redirect:/login";
+        return "redirect:/login?accountCreated=yes";
     }
 
     @GetMapping("/login")
-    public String loginForm(Model model) {
+    public String loginForm(Model model, @RequestParam(value = "accountCreated",required = false) String accountCreated) {
         model.addAttribute("loginError", false);
+        model.addAttribute("accountCreated", accountCreated);
         return "login";
     }
 

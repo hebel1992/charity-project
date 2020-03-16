@@ -27,10 +27,12 @@
 </header>
 
 <section class="login-page">
+
     <h2>Zaloguj się</h2>
 
     <p th:if="${loginError}" style="color: red; font-size: 20px">Niepoprawna nazwa użytkownika i/lub hasło</p>
-    <p th:if="${param.disabled}" style="color: red; font-size: 20px">Użytkownik został zablokowany</p>
+    <p th:if="${param.disabled}" style="color: red; font-size: 20px">Użytkownik został zablokowany.</p>
+    <p th:if="${accountCreated!=null}" style="color: green; font-size: 20px">Konto zostało utworzone.</p>
 
     <form th:action="@{/login}" method="post">
 

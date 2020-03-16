@@ -14,7 +14,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class LoginRegisterControllerTest {
+class LoginTest {
+
+    //GIVEN
 
     private WebDriver webDriver;
     private String username;
@@ -22,16 +24,21 @@ class LoginRegisterControllerTest {
     private String url;
 
     @Autowired
-    public LoginRegisterControllerTest() {
+    public LoginTest() {
+
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         webDriver = new ChromeDriver();
-        username = "randomUser";
-        password = "randomPass";
         url = "http://localhost:8080/login";
     }
 
     @Test
     void shouldNotLetLogin() {
+        //WHEN
+
+        username = "wrongName";
+        password = "wrongPassword";
+
+
         webDriver.get(url);
         webDriver.findElement(By.partialLinkText("Zaloguj")).click();
 
@@ -46,7 +53,37 @@ class LoginRegisterControllerTest {
         WebElement loginButton = webDriver.findElement(By.name("login"));
         loginButton.click();
 
+        //THEN
+
         Assertions.assertThat(webDriver.getPageSource().contains("Niepoprawna nazwa użytkownika i/lub hasło")).isTrue();
+    }
+
+
+    @Test
+    void shouldLetLogin() {
+        //WHEN
+
+        username = "testuser";
+        password = "testuser";
+
+
+        webDriver.get(url);
+        webDriver.findElement(By.partialLinkText("Zaloguj")).click();
+
+        WebElement loginName = webDriver.findElement(By.name("username"));
+        loginName.clear();
+        loginName.sendKeys(username);
+
+        WebElement loginPassword = webDriver.findElement(By.name("password"));
+        loginPassword.clear();
+        loginPassword.sendKeys(password);
+
+        WebElement loginButton = webDriver.findElement(By.name("login"));
+        loginButton.click();
+
+        //THEN
+
+        Assertions.assertThat(webDriver.getPageSource().contains("Niepoprawna nazwa użytkownika i/lub hasło")).isFalse();
     }
 
     @After

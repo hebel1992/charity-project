@@ -29,11 +29,13 @@ public class HomePageController {
     private final BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/home")
-    public String donateAction(Model model, @RequestParam("formSuccess") Boolean success,
-                               @RequestParam("passwordChanged") Boolean passwordChanged) {
+    public String donateAction(Model model, @RequestParam(value = "formSuccess", required = false) String success,
+                               @RequestParam(value = "passwordChanged", required = false) String passwordChanged,
+                               @RequestParam(value = "accountUpdated", required = false) String accountUpdated) {
         model.addAttribute("donation", new Donation());
         model.addAttribute("formSuccess", success);
         model.addAttribute("passwordChanged", passwordChanged);
+        model.addAttribute("accountUpdated", accountUpdated);
         return "form";
     }
 
@@ -47,7 +49,7 @@ public class HomePageController {
         donation.setUser(currentUser.getUser());
         donationService.saveDonation(donation);
 
-        return "redirect:home?formSuccess=true$passwordChanged=false";
+        return "redirect:home?formSuccess=yes";
     }
 
     @RequestMapping("/edit-account")
@@ -67,7 +69,7 @@ public class HomePageController {
 
         userService.saveUser(user, "user", false);
 
-        return "redirect:home?formSuccess=false$passwordChanged=false";
+        return "redirect:home?accountUpdated=yes";
     }
 
 
@@ -100,7 +102,7 @@ public class HomePageController {
 
         userService.saveUser(user, "user", true);
 
-        return "redirect:home?formSuccess=false&passwordChanged=true";
+        return "redirect:home?passwordChanged=yes";
     }
 
     @ModelAttribute("institutions")
