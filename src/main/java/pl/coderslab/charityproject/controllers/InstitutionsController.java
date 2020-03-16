@@ -23,7 +23,7 @@ public class InstitutionsController {
 
     @RequestMapping("/institutions")
     public String institutionsList() {
-        return "/institutions/institutions-list";
+        return "/admin-institutions/institutions-list";
     }
 
     @RequestMapping("/delete-institution/{instId}")
@@ -38,13 +38,13 @@ public class InstitutionsController {
     public String editInstitution(Model model, @PathVariable("instId") Long instId) {
         Institution institution = institutionService.findById(instId);
         model.addAttribute("institution", institution);
-        return "/institutions/edit-institution";
+        return "/admin-institutions/edit-institution";
     }
 
     @PostMapping("/edit-institution-action")
     public String editInstitutionAction(@ModelAttribute("institution") @Valid Institution institution, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/institutions/edit-institution";
+            return "/admin-institutions/edit-institution";
         }
         institutionService.saveInstitution(institution);
 
@@ -54,13 +54,13 @@ public class InstitutionsController {
     @RequestMapping("/add-institution")
     public String addInstitution(Model model) {
         model.addAttribute("institution", new Institution());
-        return "/institutions/add-institution";
+        return "/admin-institutions/add-institution";
     }
 
     @PostMapping("/add-institution-action")
     public String addInstitutionAction(@ModelAttribute("institution") @Valid Institution institution, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/institutions/add-institution";
+            return "/admin-institutions/add-institution";
         }
         institutionService.saveInstitution(institution);
 

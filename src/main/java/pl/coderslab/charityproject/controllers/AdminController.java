@@ -29,7 +29,7 @@ public class AdminController {
 
     @RequestMapping("/admins")
     public String adminsList() {
-        return "/admins/admins-list";
+        return "/admin-admins/admins-list";
     }
 
     @RequestMapping("/delete-admin/{instId}")
@@ -37,7 +37,7 @@ public class AdminController {
                                     @PathVariable("instId") Long instId) {
         if (currentUser.getUser().getId() == instId) {
             model.addAttribute("stopDelete", "stopDelete");
-            return "admins/admins-list";
+            return "admin-admins/admins-list";
         }
 
         User admin = userService.findById(instId);
@@ -50,14 +50,14 @@ public class AdminController {
     public String editAdmin(Model model, @PathVariable("adminId") Long instId) {
         User admin = userService.findById(instId);
         model.addAttribute("admin", admin);
-        return "/admins/edit-admin";
+        return "/admin-admins/edit-admin";
     }
 
     @PostMapping("/edit-admin-action")
     public String editAdminAction(@ModelAttribute("admin") @Validated({EditedUser.class}) User admin,
                                   BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/admins/edit-admin";
+            return "/admin-admins/edit-admin";
         }
 
         admin.setPassword(userService.findById(admin.getId()).getPassword());
@@ -70,19 +70,19 @@ public class AdminController {
     @RequestMapping("/add-admin")
     public String addAdmin(Model model) {
         model.addAttribute("admin", new User());
-        return "/admins/add-admin";
+        return "/admin-admins/add-admin";
     }
 
     @PostMapping("/add-admin-action")
     public String addAdminAction(Model model, @RequestParam("password2") String pass2,
                                  @ModelAttribute("admin") @Valid User admin, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/admins/add-admin";
+            return "/admin-admins/add-admin";
         }
 
         if (!admin.getPassword().equals(pass2)) {
             model.addAttribute("passNoMatch", true);
-            return "/admins/add-admin";
+            return "/admin-admins/add-admin";
         }
 
         userService.saveUser(admin, "admin", true);

@@ -126,7 +126,7 @@
                         Liczba 60l worków:
                         <input type="number" id="bags" step="1" min="1" th:field="*{quantity}"/>
                     </label>
-                    <span class="error-message" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></span>
+                    <span style="margin-left: 10px" class="error-message" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></span>
                 </div>
 
                 <div class="form-group form-group--buttons">
