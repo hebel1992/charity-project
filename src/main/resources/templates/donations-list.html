@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Donations List</title>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<header class="header--form-page">
+    <nav class="container container--70">
+        <ul class="nav--actions">
+            <li class="logged-user">
+                <span>Witaj </span><span sec:authentication="principal.user.firstName"></span>
+                <ul class="dropdown">
+                    <li><a th:href="@{/edit-account}">Profil</a></li>
+                    <li><a href="#">Moje zbiórki</a></li>
+                    <li><a href="javascript: document.logoutForm.submit()">Wyloguj</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+            <input hidden type="submit" value="Sign Out"/>
+        </form>
+
+        <ul>
+            <li><a th:href="@{/home}" class="btn btn--without-border active">Start</a></li>
+            <li><a th:href="@{/home#steps}" class="btn btn--without-border">O co chodzi?</a></li>
+            <li><a th:href="@{/home#form}" class="btn btn--without-border">Formularz</a></li>
+            <li><a th:href="@{/home#contact}" class="btn btn--without-border">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <section class="login-page">
+        <h2>Twoje zbiórki</h2>
+        <ul style="font-size: 30px">
+            <li class="btn--without-border" th:each="donation : ${donations}" style="margin-bottom: 20px">
+                <a th:href="@{'/donation-details/' + ${donation.id}}">
+                <span th:each="category, iter : ${donation.categories}">
+                    <span th:if="${iter.index<donation.categories.size()-1}" th:text="${category.name}+', '"></span>
+                    <span th:if="${iter.index==donation.categories.size()-1}" th:text="${category.name}"></span>
+                </span>
+                    <span>z dnia <span th:text="${donation.created}"></span></span>
+                    <span> | status: </span><span th:style="${donation.status==T(pl.coderslab.charityproject.models.Status).nieodebrana ? 'color:red' : 'color:green'}"
+                                                  th:text="${donation.status}"></span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="form-group form-group--buttons">
+            <a th:href="@{/home}" class="btn">Powrót</a>
+        </div>
+    </section>
+</header>
+
+<div th:include="footer.html"></div>
+</body>
+</html>

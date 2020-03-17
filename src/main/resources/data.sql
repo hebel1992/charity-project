@@ -26,14 +26,15 @@ INSERT INTO institutions (id, description, name, city, phone_number) VALUES (6, 
 INSERT INTO institutions (id, description, name, city, phone_number) VALUES (7, '"Pomoc porzuconym dzieciom."' ,'"Pajacyk"', 'Opole', '6343523532');
 INSERT INTO institutions (id, description, name, city, phone_number) VALUES (8, '"Pomoc osobom starszym"' ,'"Odwet dla Seniora"', 'Kielce', '1231543564');
 
-INSERT INTO donations (id, city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, phone_number, user_id) VALUES (1, 'Wrocław', DATE_ADD(NOW(),INTERVAL +1 DAY), '15:30', 3, 'ul. Mala 3', '32-500', 1, '324678421', 1);
-INSERT INTO donations (id, city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, pick_up_comment, phone_number, user_id) VALUES (2, 'Poznań', DATE_ADD(NOW(),INTERVAL +2 DAY), '15:45', 5, 'ul. Duza 4', '78-300', 2, 'Komentarz do odbioru', '3562453422', 2);
-INSERT INTO donations (id, city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, pick_up_comment, phone_number, user_id) VALUES (3, 'Gdańsk', DATE_ADD(NOW(),INTERVAL +9 DAY), '12:45', 12, 'ul. Tęczowa 12b', '99-103', 3, 'Komentarz do odbioru', '434352342', 2);
-INSERT INTO donations (id, city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, phone_number, user_id) VALUES (4, 'Warszawa', DATE_ADD(NOW(),INTERVAL +9 DAY), '11:30', 10, 'ul. Kamienna 1c', '11-020', 4, '35412312', 3);
-INSERT INTO donations (id, city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, phone_number, user_id) VALUES (5, 'Szczecin', DATE_ADD(NOW(),INTERVAL +5 DAY), '19:30', 7, 'ul. Miodowa 88', '11-321', 5, '345242342', 1);
-INSERT INTO donations (id, city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, pick_up_comment, phone_number, user_id) VALUES (6, 'Kielca', DATE_ADD(NOW(),INTERVAL +3 DAY), '12:45', 5, 'ul. Szara 77', '54-432', 8, 'Komentarz do odbioru', '5475786534', 4);
-INSERT INTO donations (id, city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, pick_up_comment, phone_number, user_id) VALUES (7, 'Białystok', DATE_ADD(NOW(),INTERVAL +10 DAY), '19:20', 3, 'ul. Fioletowa 128', '43-123', 7, 'Komentarz do odbioru', '12446353', 4);
-INSERT INTO donations (id, city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, phone_number, user_id) VALUES (8, 'Lubin', DATE_ADD(NOW(),INTERVAL +15 DAY), '14:30', 13, 'ul. Złota 55', '64-645', 7, '344352342', 2);
+INSERT INTO donations (id, status, created, city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, phone_number, user_id) VALUES (1, 1, DATE_ADD(NOW(),INTERVAL -3 DAY), 'Wrocław', DATE_ADD(NOW(),INTERVAL +1 DAY), '15:30', 3, 'ul. Mala 3', '32-500', 1, '324678421', 1);
+INSERT INTO donations (id, status, actual_pick_up_date,created, city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, phone_number, user_id) VALUES (9, 0, DATE_ADD(NOW(),INTERVAL -6 DAY), DATE_ADD(NOW(),INTERVAL -12 DAY), 'Wrocław', DATE_ADD(NOW(),INTERVAL -6 DAY), '15:30', 3, 'ul. Mala 3', '32-500', 1, '324678421', 1);
+INSERT INTO donations (id, status, created, city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, pick_up_comment, phone_number, user_id) VALUES (2, 1, DATE_ADD(NOW(),INTERVAL -4 DAY), 'Poznań', DATE_ADD(NOW(),INTERVAL +2 DAY), '15:45', 5, 'ul. Duza 4', '78-300', 2, 'Komentarz do odbioru', '3562453422', 2);
+INSERT INTO donations (id, status, created, city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, pick_up_comment, phone_number, user_id) VALUES (3, 1, DATE_ADD(NOW(),INTERVAL -5 DAY), 'Gdańsk', DATE_ADD(NOW(),INTERVAL +9 DAY), '12:45', 12, 'ul. Tęczowa 12b', '99-103', 3, 'Komentarz do odbioru', '434352342', 2);
+INSERT INTO donations (id, status, created, city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, phone_number, user_id) VALUES (4, 1, DATE_ADD(NOW(),INTERVAL -1 DAY), 'Warszawa', DATE_ADD(NOW(),INTERVAL +9 DAY), '11:30', 10, 'ul. Kamienna 1c', '11-020', 4, '35412312', 3);
+INSERT INTO donations (id, status, created, city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, phone_number, user_id) VALUES (5, 1, DATE_ADD(NOW(),INTERVAL -7 DAY), 'Szczecin', DATE_ADD(NOW(),INTERVAL +5 DAY), '19:30', 7, 'ul. Miodowa 88', '11-321', 5, '345242342', 1);
+INSERT INTO donations (id, status, actual_pick_up_date, created, city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, pick_up_comment, phone_number, user_id) VALUES (6, 0, DATE_ADD(NOW(),INTERVAL -4 DAY), DATE_ADD(NOW(),INTERVAL -8 DAY), 'Kielca', DATE_ADD(NOW(),INTERVAL +3 DAY), '12:45', 5, 'ul. Szara 77', '54-432', 8, 'Komentarz do odbioru', '5475786534', 4);
+INSERT INTO donations (id, status, actual_pick_up_date, created, city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, pick_up_comment, phone_number, user_id) VALUES (7, 0, DATE_ADD(NOW(),INTERVAL -5 DAY), DATE_ADD(NOW(),INTERVAL -10 DAY), 'Białystok', DATE_ADD(NOW(),INTERVAL +10 DAY), '19:20', 3, 'ul. Fioletowa 128', '43-123', 7, 'Komentarz do odbioru', '12446353', 4);
+INSERT INTO donations (id, status, created, city, pick_up_date, pick_up_time, quantity, street, zip_code, institution_id, phone_number, user_id) VALUES (8, 1, DATE_ADD(NOW(),INTERVAL -2 DAY), 'Lubin', DATE_ADD(NOW(),INTERVAL +15 DAY), '14:30', 13, 'ul. Złota 55', '64-645', 7, '344352342', 2);
 
 INSERT INTO categories (id, name) VALUES (1, 'Odzież');
 INSERT INTO categories (id, name) VALUES (2, 'Buty');
@@ -56,6 +57,8 @@ INSERT INTO donations_categories (donation_id, category_id) VALUES (6, 3);
 INSERT INTO donations_categories (donation_id, category_id) VALUES (7, 2);
 INSERT INTO donations_categories (donation_id, category_id) VALUES (8, 3);
 INSERT INTO donations_categories (donation_id, category_id) VALUES (8, 2);
+INSERT INTO donations_categories (donation_id, category_id) VALUES (9, 3);
+INSERT INTO donations_categories (donation_id, category_id) VALUES (9, 2);
 
 
 

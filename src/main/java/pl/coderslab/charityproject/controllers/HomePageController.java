@@ -47,6 +47,7 @@ public class HomePageController {
         }
 
         donation.setUser(currentUser.getUser());
+        donation.setStatus(Status.nieodebrana);
         donationService.saveDonation(donation);
 
         return "redirect:/home?formSuccess=yes";
@@ -104,6 +105,34 @@ public class HomePageController {
 
         return "redirect:/home?passwordChanged=yes";
     }
+
+    @RequestMapping("/donations-list")
+    public String donationList(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
+        model.addAttribute("donations", donationService.findByUser(currentUser.getUser().getId()));
+        return "donations-list";
+    }
+
+    @RequestMapping("/donation-details/{donationId}")
+    public String donationDetails(Model model, @PathVariable("donationId") Long donationId) {
+        model.addAttribute("donation", donationService.findById(donationId));
+        return "donation-details";
+    }
+
+    @RequestMapping("/change-status/{donationId}")
+    public String changeStatus(Model model, @PathVariable("donationId") Long donationId) {
+        model.addAttribute("donation", donationService.findById(donationId));
+        return "change-status";
+    }
+
+    @PostMapping("/change-status-action")
+    public String changeStatusAction(@ModelAttribute Donation donation) {
+
+        donation.setStatus(Status.odebrana);
+        donationService.saveDonation(donation);
+
+        return "redirect:/donation-details/"+donation.getId();
+    }
+
 
     @ModelAttribute("institutions")
     public List<Institution> getInstitutions() {

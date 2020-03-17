@@ -51,6 +51,10 @@ public class Donation extends AbstractEntity {
     @Column(name = "pick_up_date")
     private LocalDate pickUpDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "actual_pick_up_date")
+    private LocalDate actualPickUpDate;
+
     @NotNull
     @MyTime(minHour = 8, maxHour = 20)
     @Column(name = "pick_up_time")
@@ -58,6 +62,12 @@ public class Donation extends AbstractEntity {
 
     @Column(name = "pick_up_comment")
     private String pickUpComment;
+
+    @Column(name = "created")
+    private LocalDate created;
+
+    @Column(name = "status")
+    private Status status;
 
     @NotNull
     @Size(min = 1, message = "nie podano kategorii")
@@ -74,4 +84,9 @@ public class Donation extends AbstractEntity {
     @JoinColumn(name = "user_id")
     @ManyToOne
     private User user;
+
+    @PrePersist
+    public void create(){
+        this.created = LocalDate.now();
+    }
 }

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Donation Details</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+
+<header class="header--form-page">
+    <nav class="container container--70">
+        <ul class="nav--actions">
+            <li class="logged-user">
+                <span>Witaj </span><span sec:authentication="principal.user.firstName"></span>
+                <ul class="dropdown">
+                    <li><a th:href="@{/edit-account}">Profil</a></li>
+                    <li><a th:href="@{/donations-list}">Moje zbiórki</a></li>
+                    <li><a href="javascript: document.logoutForm.submit()">Wyloguj</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+            <input hidden type="submit" value="Sign Out"/>
+        </form>
+
+        <ul>
+            <li><a th:href="@{/home}" class="btn btn--without-border active">Start</a></li>
+            <li><a th:href="@{/home#steps}" class="btn btn--without-border">O co chodzi?</a></li>
+            <li><a th:href="@{/home#form}" class="btn btn--without-border">Formularz</a></li>
+            <li><a th:href="@{/home#contact}" class="btn btn--without-border">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <section class="login-page">
+        <h2>Zmiana statusu</h2>
+        <form th:action="@{/change-status-action}" method="post" th:object="${donation}">
+            <input type="hidden" th:value="${donation.id}" th:field="*{id}">
+            <input type="hidden" th:value="${donation.quantity}" th:field="*{quantity}">
+            <input type="hidden" th:value="${donation.street}" th:field="*{street}">
+            <input type="hidden" th:value="${donation.city}" th:field="*{city}">
+            <input type="hidden" th:value="${donation.phoneNumber}" th:field="*{phoneNumber}">
+            <input type="hidden" th:value="${donation.zipCode}" th:field="*{zipCode}">
+            <input type="hidden" th:value="${donation.pickUpDate}" th:field="*{pickUpDate}">
+            <input type="hidden" th:value="${donation.pickUpTime}" th:field="*{pickUpTime}">
+            <input type="hidden" th:value="${donation.pickUpComment}" th:field="*{pickUpComment}">
+            <input type="hidden" th:value="${donation.created}" th:field="*{created}">
+            <input type="hidden" th:value="${donation.categories}" th:field="*{categories}">
+            <input type="hidden" th:value="${donation.institution}" th:field="*{institution}">
+            <input type="hidden" th:value="${donation.user}" th:field="*{user}">
+
+            <span style="font-size: 20px; margin-left: 50px"><span style="margin-right: 15px">Wprowadź datę odbioru przesyłki: </span>
+            <input id="date" type="date" max="9999-12-12" th:field="*{actualPickUpDate}"/>
+            </span>
+
+            <div class="form-group form-group--buttons" style="margin-left: 45px; margin-top: 100px">
+                <a th:href="@{'/donation-details/'+${donation.id}}" class="btn btn--without-border">Powrót</a>
+                <button class="btn" type="submit">Zapisz</button>
+            </div>
+
+        </form>
+    </section>
+</header>
+
+<div th:include="footer.html"></div>
+</body>
+</html>
