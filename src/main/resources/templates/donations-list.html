@@ -37,6 +37,7 @@
 
     <section class="login-page">
         <h2>Twoje zbiórki</h2>
+        <p style="font-size: 25px" th:if="${donations==null || donations.isEmpty()}">Nie dodałeś/aś jeszcze żadnych zbiórek.</p>
         <ul style="font-size: 30px">
             <li class="btn--without-border" th:each="donation : ${donations}" style="margin-bottom: 20px">
                 <a th:href="@{'/donation-details/' + ${donation.id}}">

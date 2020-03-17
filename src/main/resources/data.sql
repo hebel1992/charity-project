@@ -2,6 +2,7 @@ INSERT INTO user (id, email, enabled, first_name, last_name, password, username,
 INSERT INTO user (id, email, enabled, first_name, last_name, password, username, blocked) VALUES (2, 'm.halas@o2.pl', 1, 'Michał', 'Hałaś', '$2a$10$h8DEAw7CVSellRjD7JwsBeBawdmcnveaVcfThbQ0Li1UZFA6/NQQi', 'testuser1', false);
 INSERT INTO user (id, email, enabled, first_name, last_name, password, username, blocked) VALUES (3, 'g.mazur@gmail.com', 1, 'Grzegorz', 'Mazur', '$2a$10$pmwgKP4.p5ha80BFzH2Nk.r92oNDsN/s0/5uTX.Uo6rAPSEkMk6DO', 'testuser2', false);
 INSERT INTO user (id, email, enabled, first_name, last_name, password, username, blocked) VALUES (4, 'n.krych@onet.pl', 1, 'Natalia', 'Krychowiak', '$2a$10$xiiBJgFIM8VURK5HNBUAnOr.2QLT7ex0GiKOXjPBM6OLuvN7FO1pC', 'testuser3', true);
+INSERT INTO user (id, email, enabled, first_name, last_name, password, username, blocked) VALUES (5, 'e.korwin@onet.pl', 1, 'Emil', 'Korwin', '$2a$10$h8DEAw7CVSellRjD7JwsBeBawdmcnveaVcfThbQ0Li1UZFA6/NQQi', 'testuser4', false);
 
 INSERT INTO role (id, name, description) VALUES (1, 'ROLE_ADMIN', 'Admin');
 INSERT INTO role (id, name, description) VALUES (2, 'ROLE_USER', 'User');
@@ -9,13 +10,14 @@ INSERT INTO role (id, name, description) VALUES (2, 'ROLE_USER', 'User');
 INSERT INTO user_role (user_id, role_id) VALUES (1,2);
 INSERT INTO user_role (user_id, role_id) VALUES (2,2);
 INSERT INTO user_role (user_id, role_id) VALUES (3,2);
+INSERT INTO user_role (user_id, role_id) VALUES (5,2);
 
-INSERT INTO user (id, email, enabled, first_name, last_name, password, username, blocked) VALUES (5, 'i.sowa.o2.pl', 1, 'Ilona', 'Sowa', '$2a$10$ssLUf7WmudX9ZT9jzSBrUuS4jt/zXimoqDfqYI2S8PUiVOOlW1U16', 'testadmin', false);
-INSERT INTO user (id, email, enabled, first_name, last_name, password, username, blocked) VALUES (6, 'm.gora@wp.pl', 1, 'Marta', 'Góra', '$2a$10$oLSTrxC5pP3tCryj3PazPeXao.7iFfVSsihzH5b3SdaA9WBz03lte', 'testadmin1', false);
-INSERT INTO user (id, email, enabled, first_name, last_name, password, username, blocked) VALUES (7, 's.kopacz@onet.pl', 1, 'Szymon', 'Kopacz', '$2a$10$wyteC2CCTVYZFg87XIvKPetmVM2nhmYMjUtgThkfiEtlyggxpX6.a', 'testadmin2', false);
-INSERT INTO user_role (user_id, role_id) VALUES (5,1);
+INSERT INTO user (id, email, enabled, first_name, last_name, password, username, blocked) VALUES (6, 'i.sowa.o2.pl', 1, 'Ilona', 'Sowa', '$2a$10$ssLUf7WmudX9ZT9jzSBrUuS4jt/zXimoqDfqYI2S8PUiVOOlW1U16', 'testadmin', false);
+INSERT INTO user (id, email, enabled, first_name, last_name, password, username, blocked) VALUES (7, 'm.gora@wp.pl', 1, 'Marta', 'Góra', '$2a$10$oLSTrxC5pP3tCryj3PazPeXao.7iFfVSsihzH5b3SdaA9WBz03lte', 'testadmin1', false);
+INSERT INTO user (id, email, enabled, first_name, last_name, password, username, blocked) VALUES (8, 's.kopacz@onet.pl', 1, 'Szymon', 'Kopacz', '$2a$10$wyteC2CCTVYZFg87XIvKPetmVM2nhmYMjUtgThkfiEtlyggxpX6.a', 'testadmin2', false);
 INSERT INTO user_role (user_id, role_id) VALUES (6,1);
 INSERT INTO user_role (user_id, role_id) VALUES (7,1);
+INSERT INTO user_role (user_id, role_id) VALUES (8,1);
 
 INSERT INTO institutions (id, description, name, city, phone_number) VALUES (1, '"Pomoc dzieciom z ubogich rodzin."' ,'"Dbam o Zdrowie"', 'Warszawa', '764123890');
 INSERT INTO institutions (id, description, name, city, phone_number) VALUES (2, '"Pomoc w wybudzaniu dzieci ze śpiączki."' ,'"A kogo"', 'Wrocław', '235283902');
