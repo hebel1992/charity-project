@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<header class="header--form-page">
+<header>
     <nav class="container container--70">
         <ul class="nav--actions">
             <li class="logged-user">
@@ -34,29 +34,30 @@
             <li><a th:href="@{/home#contact}" class="btn btn--without-border">Kontakt</a></li>
         </ul>
     </nav>
-
-    <section class="login-page">
-        <h2>Twoje zbiórki</h2>
-        <p style="font-size: 25px" th:if="${donations==null || donations.isEmpty()}">Nie dodałeś/aś jeszcze żadnych zbiórek.</p>
-        <ul style="font-size: 30px">
-            <li class="btn--without-border" th:each="donation : ${donations}" style="margin-bottom: 20px">
-                <a th:href="@{'/donation-details/' + ${donation.id}}">
+</header>
+<section class="login-page">
+    <h2>Twoje zbiórki</h2>
+    <p style="font-size: 25px" th:if="${donations==null || donations.isEmpty()}">Nie dodałeś/aś jeszcze żadnych
+        zbiórek.</p>
+    <ul style="font-size: 30px">
+        <li class="btn--without-border" th:each="donation : ${donations}" style="margin-bottom: 20px">
+            <a th:href="@{'/donation-details/' + ${donation.id}}">
                 <span th:each="category, iter : ${donation.categories}">
                     <span th:if="${iter.index<donation.categories.size()-1}" th:text="${category.name}+', '"></span>
                     <span th:if="${iter.index==donation.categories.size()-1}" th:text="${category.name}"></span>
                 </span>
-                    <span>z dnia <span th:text="${donation.created}"></span></span>
-                    <span> | status: </span><span th:style="${donation.status==T(pl.coderslab.charityproject.models.Status).nieodebrana ? 'color:red' : 'color:green'}"
-                                                  th:text="${donation.status}"></span>
-                </a>
-            </li>
-        </ul>
+                <span>z dnia <span th:text="${donation.created}"></span></span>
+                <span> | status: </span><span
+                    th:style="${donation.status==T(pl.coderslab.charityproject.models.Status).nieodebrana ? 'color:red' : 'color:green'}"
+                    th:text="${donation.status}"></span>
+            </a>
+        </li>
+    </ul>
 
-        <div class="form-group form-group--buttons">
-            <a th:href="@{/home}" class="btn">Powrót</a>
-        </div>
-    </section>
-</header>
+    <div class="form-group form-group--buttons">
+        <a th:href="@{/home}" class="btn">Powrót</a>
+    </div>
+</section>
 
 <div th:include="footer.html"></div>
 </body>
