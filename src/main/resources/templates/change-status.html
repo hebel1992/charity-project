@@ -55,6 +55,8 @@
         <span style="font-size: 20px; margin-left: 50px"><span style="margin-right: 15px">Wprowadź datę odbioru przesyłki: </span>
             <input id="date" type="date" max="9999-12-12" th:field="*{actualPickUpDate}"/>
             </span>
+        <span style="margin-left: 230px" class="error-message" th:if="${dateRequired!=null}">pole wymagane</span>
+        <span style="margin-left: 200px" class="error-message" th:if="${#fields.hasErrors('actualPickUpDate')}" th:errors="*{actualPickUpDate}"></span>
 
         <div class="form-group form-group--buttons" style="margin-left: 45px; margin-top: 100px">
             <a th:href="@{'/donation-details/'+${donation.id}}" class="btn btn--without-border">Powrót</a>

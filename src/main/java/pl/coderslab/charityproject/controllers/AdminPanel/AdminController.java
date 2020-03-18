@@ -1,4 +1,4 @@
-package pl.coderslab.charityproject.controllers;
+package pl.coderslab.charityproject.controllers.AdminPanel;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

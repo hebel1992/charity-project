@@ -81,7 +81,7 @@
                   th:text="'(dnia: '+${donation.actualPickUpDate}+')'"></span>
             <span style="font-size: 15px"
                   th:if="${donation.status==T(pl.coderslab.charityproject.models.Status).nieodebrana}">
-                    <a style="color: blue" th:href="@{'/change-status/'+${donation.id}}">zmień status</a>
+                    <a style="color: blue" th:href="@{'/change-status/'+${donation.id}}">oznacz jako odebrana</a>
                 </span>
         </p>
     </div>

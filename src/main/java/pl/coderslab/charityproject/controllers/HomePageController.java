@@ -125,7 +125,17 @@ public class HomePageController {
     }
 
     @PostMapping("/change-status-action")
-    public String changeStatusAction(@ModelAttribute Donation donation) {
+    public String changeStatusAction(Model model, @ModelAttribute @Valid Donation donation,
+                                     BindingResult bindingResult) {
+
+        if(donation.getActualPickUpDate()==null){
+            model.addAttribute("dateRequired", "dateRequired");
+            return "change-status";
+        }
+
+        if(bindingResult.hasErrors()){
+            return "change-status";
+        }
 
         donation.setStatus(Status.odebrana);
         donationService.saveDonation(donation);
