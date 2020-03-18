@@ -45,6 +45,7 @@
                                 <tbody>
                                 <tr th:each="donation : ${donations}">
                                     <td>
+                                        <span style="font-style: italic" th:if="${donation.categories==null || donation.categories.isEmpty()}">nie określona</span>
                                          <span th:each="category, iter : ${donation.categories}">
                     <span th:if="${iter.index<donation.categories.size()-1}" th:text="${category.name}+', '"></span>
                     <span th:if="${iter.index==donation.categories.size()-1}" th:text="${category.name}"></span>

@@ -15,6 +15,7 @@ import pl.coderslab.charityproject.services.InstitutionService;
 import pl.coderslab.charityproject.services.UserService;
 import pl.coderslab.charityproject.validationGroups.EditedUser;
 import pl.coderslab.charityproject.validationGroups.UserChangePassword;
+import pl.coderslab.charityproject.validationGroups.UserCreatingDonation;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -41,7 +42,7 @@ public class HomePageController {
 
     @PostMapping("/donate-execute")
     public String donateActionExecute(@AuthenticationPrincipal CurrentUser currentUser,
-                                      @ModelAttribute("donation") @Valid Donation donation, BindingResult bindingResult) {
+                                      @ModelAttribute("donation") @Validated({UserCreatingDonation.class}) Donation donation, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "form";
         }

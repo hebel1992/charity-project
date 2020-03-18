@@ -41,6 +41,7 @@
     <div style="font-size: 25px">
         <p>
             <span class="donation-title">Zawartość:</span>
+            <span style="font-style: italic" th:if="${donation.categories==null || donation.categories.isEmpty()}">nie określona</span>
             <span th:each="category, iter : ${donation.categories}">
                     <span th:if="${iter.index<donation.categories.size()-1}" th:text="${category.name}+', '"></span>
                     <span th:if="${iter.index==donation.categories.size()-1}" th:text="${category.name}"></span>

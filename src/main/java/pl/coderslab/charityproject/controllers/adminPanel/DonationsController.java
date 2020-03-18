@@ -3,6 +3,7 @@ package pl.coderslab.charityproject.controllers.adminPanel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,8 +13,10 @@ import pl.coderslab.charityproject.services.CategoryService;
 import pl.coderslab.charityproject.services.DonationService;
 import pl.coderslab.charityproject.services.InstitutionService;
 import pl.coderslab.charityproject.services.UserService;
+import pl.coderslab.charityproject.validationGroups.UserCreatingDonation;
 
 import javax.validation.Valid;
+import javax.validation.groups.Default;
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,7 +55,7 @@ public class DonationsController extends AbstractController {
 
     @PostMapping("/edit-donation-action")
     public String editDonationAction(Model model,
-                                     @ModelAttribute("donation") @Valid Donation donation, BindingResult bindingResult) {
+                                     @ModelAttribute("donation") @Validated({Default.class}) Donation donation, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "admin-donations/edit-donation";
         }
@@ -75,7 +78,7 @@ public class DonationsController extends AbstractController {
     }
 
     @PostMapping("/add-donation-action")
-    public String addDonationAction(@ModelAttribute("donation") @Valid Donation donation,
+    public String addDonationAction(@ModelAttribute("donation") @Validated({Default.class}) Donation donation,
                                     BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "admin-donations/add-donation";
