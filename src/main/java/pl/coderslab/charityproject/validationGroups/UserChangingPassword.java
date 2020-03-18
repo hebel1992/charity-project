@@ -1,4 +1,4 @@
 package pl.coderslab.charityproject.validationGroups;
 
-public interface UserChangePassword {
+public interface UserChangingPassword {
 }

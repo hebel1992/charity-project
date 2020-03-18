@@ -10,7 +10,7 @@ import pl.coderslab.charityproject.services.DonationService;
 import pl.coderslab.charityproject.services.InstitutionService;
 import pl.coderslab.charityproject.services.UserService;
 import pl.coderslab.charityproject.validationGroups.EditedUser;
-import pl.coderslab.charityproject.validationGroups.UserChangePassword;
+import pl.coderslab.charityproject.validationGroups.UserChangingPassword;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -73,7 +73,7 @@ public class UserController extends AbstractController {
 
     @PostMapping("/change-user-password-action")
     public String changeUserPasswordAction(Model model, @RequestParam("password2") String pass2,
-                                           @ModelAttribute("user") @Validated({UserChangePassword.class}) User user,
+                                           @ModelAttribute("user") @Validated({UserChangingPassword.class}) User user,
                                            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "admin-users/change-user-password";

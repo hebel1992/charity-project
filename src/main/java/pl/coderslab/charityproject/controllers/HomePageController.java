@@ -14,7 +14,7 @@ import pl.coderslab.charityproject.services.DonationService;
 import pl.coderslab.charityproject.services.InstitutionService;
 import pl.coderslab.charityproject.services.UserService;
 import pl.coderslab.charityproject.validationGroups.EditedUser;
-import pl.coderslab.charityproject.validationGroups.UserChangePassword;
+import pl.coderslab.charityproject.validationGroups.UserChangingPassword;
 import pl.coderslab.charityproject.validationGroups.UserCreatingDonation;
 
 import javax.validation.Valid;
@@ -85,7 +85,7 @@ public class HomePageController {
     @PostMapping("/change-password-action")
     public String changePasswordAction(Model model, @AuthenticationPrincipal CurrentUser currentUser, @RequestParam("password2") String pass2,
                                        @RequestParam("oldPassword") String oldPassword,
-                                       @ModelAttribute("user") @Validated({UserChangePassword.class}) User user, BindingResult bindingResult) {
+                                       @ModelAttribute("user") @Validated({UserChangingPassword.class}) User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "change-password";
         }
