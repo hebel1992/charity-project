@@ -22,7 +22,7 @@ public class Category extends AbstractEntity {
     @Getter
     @Setter
     @NotNull
-    @Size(min = 3, message = "min 3 characters")
+    @Size(min = 3, max = 20, message = "min. 3, max. 20 znaków")
     @Column(name = "name")
     private String name;
 

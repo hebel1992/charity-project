@@ -1,12 +1,13 @@
-package pl.coderslab.charityproject.controllers.AdminPanel;
+package pl.coderslab.charityproject.controllers.adminPanel;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charityproject.models.User;
+import pl.coderslab.charityproject.services.DonationService;
+import pl.coderslab.charityproject.services.InstitutionService;
 import pl.coderslab.charityproject.services.UserService;
 import pl.coderslab.charityproject.validationGroups.EditedUser;
 import pl.coderslab.charityproject.validationGroups.UserChangePassword;
@@ -15,11 +16,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
 @RequestMapping("/admin")
-public class UserController {
+public class UserController extends AbstractController {
 
-    private final UserService userService;
+    public UserController(DonationService donationService, UserService userService,
+                          InstitutionService institutionService) {
+        super(donationService, userService, institutionService);
+    }
 
     @RequestMapping("/users")
     public String userList() {

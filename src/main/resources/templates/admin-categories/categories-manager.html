@@ -26,9 +26,18 @@
         <main>
             <div class="container-fluid">
                 <div th:include="admin-main/admin-sub-header.html"></div>
+                <div class="card mb-4">
+                    <div class="card-header align-middle"><i class="fas fa-table mr-1"></i>Dodawanie/usuwanie kategorii
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
 
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
+
         <div th:include="admin-main/admin-footer.html"></div>
 
     </div>
@@ -56,6 +65,8 @@
             e.preventDefault();
             $("body").toggleClass("sb-sidenav-toggled");
         });
+
+
     })(jQuery);
 </script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"

@@ -1,10 +1,12 @@
-package pl.coderslab.charityproject.controllers.AdminPanel;
+package pl.coderslab.charityproject.controllers.adminPanel;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charityproject.models.*;
 import pl.coderslab.charityproject.services.CategoryService;
 import pl.coderslab.charityproject.services.DonationService;
@@ -16,14 +18,17 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
 @RequestMapping("/admin")
-public class DonationsController {
+public class DonationsController extends AbstractController {
 
-    private final DonationService donationService;
     private final CategoryService categoryService;
-    private final UserService userService;
-    private final InstitutionService institutionService;
+
+
+    public DonationsController(DonationService donationService, CategoryService categoryService,
+                               UserService userService, InstitutionService institutionService) {
+        super(donationService, userService, institutionService);
+        this.categoryService = categoryService;
+    }
 
     @RequestMapping("/donations")
     public String donationsList() {
@@ -52,7 +57,7 @@ public class DonationsController {
             return "admin-donations/edit-donation";
         }
 
-        if(donation.getStatus()==Status.odebrana && donation.getActualPickUpDate()==null){
+        if (donation.getStatus() == Status.odebrana && donation.getActualPickUpDate() == null) {
             model.addAttribute("dateRequired", "dateRequired");
             return "admin-donations/edit-donation";
         }

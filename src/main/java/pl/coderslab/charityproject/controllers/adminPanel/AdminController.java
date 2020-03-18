@@ -1,6 +1,6 @@
-package pl.coderslab.charityproject.controllers.AdminPanel;
+package pl.coderslab.charityproject.controllers.adminPanel;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +11,8 @@ import pl.coderslab.charityproject.models.Category;
 import pl.coderslab.charityproject.models.CurrentUser;
 import pl.coderslab.charityproject.models.User;
 import pl.coderslab.charityproject.services.CategoryService;
+import pl.coderslab.charityproject.services.DonationService;
+import pl.coderslab.charityproject.services.InstitutionService;
 import pl.coderslab.charityproject.services.UserService;
 import pl.coderslab.charityproject.validationGroups.EditedUser;
 
@@ -18,12 +20,17 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
 @RequestMapping("/admin")
-public class AdminController {
+public class AdminController extends AbstractController {
 
-    private final UserService userService;
     private final CategoryService categoryService;
+
+    @Autowired
+    public AdminController(DonationService donationService, CategoryService categoryService,
+                           UserService userService, InstitutionService institutionService) {
+        super(donationService, userService, institutionService);
+        this.categoryService = categoryService;
+    }
 
     @RequestMapping
     public String mainPage() {
@@ -95,14 +102,14 @@ public class AdminController {
         return "redirect:/admin/admins";
     }
 
-
     @ModelAttribute("admins")
     public List<User> admins() {
         return userService.findAdmins();
     }
 
     @ModelAttribute("categories")
-    public List<Category> categories(){
+    public List<Category> categories() {
         return categoryService.findAll();
     }
 }
+

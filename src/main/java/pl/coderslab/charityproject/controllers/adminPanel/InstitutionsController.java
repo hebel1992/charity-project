@@ -1,6 +1,5 @@
-package pl.coderslab.charityproject.controllers.AdminPanel;
+package pl.coderslab.charityproject.controllers.adminPanel;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,17 +8,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charityproject.models.Institution;
+import pl.coderslab.charityproject.services.DonationService;
 import pl.coderslab.charityproject.services.InstitutionService;
+import pl.coderslab.charityproject.services.UserService;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
 @RequestMapping("/admin")
-public class InstitutionsController {
+public class InstitutionsController extends AbstractController {
 
-    private final InstitutionService institutionService;
+    public InstitutionsController(DonationService donationService, InstitutionService institutionService,
+                                  UserService userService) {
+        super(donationService, userService, institutionService);
+    }
 
     @RequestMapping("/institutions")
     public String institutionsList() {
@@ -71,5 +74,4 @@ public class InstitutionsController {
     public List<Institution> institutions() {
         return institutionService.findAll();
     }
-
 }
