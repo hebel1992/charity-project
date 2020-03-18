@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.charityproject.models.Donation;
+import pl.coderslab.charityproject.models.*;
+import pl.coderslab.charityproject.services.CategoryService;
 import pl.coderslab.charityproject.services.DonationService;
+import pl.coderslab.charityproject.services.InstitutionService;
+import pl.coderslab.charityproject.services.UserService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -20,6 +23,9 @@ import java.util.List;
 public class DonationsController {
 
     private final DonationService donationService;
+    private final CategoryService categoryService;
+    private final UserService userService;
+    private final InstitutionService institutionService;
 
     @RequestMapping("/donations")
     public String donationsList() {
@@ -65,6 +71,7 @@ public class DonationsController {
             return "admin-donations/add-donation";
         }
 
+        donation.setStatus(Status.nieodebrana);
         donationService.saveDonation(donation);
 
         return "redirect:/admin/donations";
@@ -73,5 +80,20 @@ public class DonationsController {
     @ModelAttribute("donations")
     public List<Donation> donations() {
         return donationService.findAll();
+    }
+
+    @ModelAttribute("categories")
+    public List<Category> categories() {
+        return categoryService.findAll();
+    }
+
+    @ModelAttribute("users")
+    public List<User> users() {
+        return userService.findUsers();
+    }
+
+    @ModelAttribute("institutions")
+    public List<Institution> institutions() {
+        return institutionService.findAll();
     }
 }
