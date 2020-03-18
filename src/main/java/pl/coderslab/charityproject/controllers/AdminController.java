@@ -7,8 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.charityproject.models.Category;
 import pl.coderslab.charityproject.models.CurrentUser;
 import pl.coderslab.charityproject.models.User;
+import pl.coderslab.charityproject.services.CategoryService;
 import pl.coderslab.charityproject.services.UserService;
 import pl.coderslab.charityproject.validationGroups.EditedUser;
 
@@ -21,6 +23,7 @@ import java.util.List;
 public class AdminController {
 
     private final UserService userService;
+    private final CategoryService categoryService;
 
     @RequestMapping
     public String mainPage() {
@@ -92,8 +95,14 @@ public class AdminController {
         return "redirect:/admin/admins";
     }
 
+
     @ModelAttribute("admins")
     public List<User> admins() {
         return userService.findAdmins();
+    }
+
+    @ModelAttribute("categories")
+    public List<Category> categories(){
+        return categoryService.findAll();
     }
 }

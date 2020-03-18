@@ -18,6 +18,10 @@ public class DonationService {
         donationRepository.save(donation);
     }
 
+    public void deleteDonation(Donation donation){
+        donationRepository.delete(donation);
+    }
+
     public List<Donation> findAll() {
         return donationRepository.findAll();
     }
