@@ -1,6 +1,7 @@
 package pl.coderslab.charityproject.controllers.adminPanel;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,6 @@ public class CategoryController extends AbstractController {
 
     private final CategoryService categoryService;
 
-
     public CategoryController(DonationService donationService, CategoryService categoryService,
                               UserService userService, InstitutionService institutionService) {
         super(donationService, userService, institutionService);
@@ -29,7 +29,8 @@ public class CategoryController extends AbstractController {
     }
 
     @RequestMapping("/categories")
-    public String categoriesList() {
+    public String categoriesList(Model model) {
+        model.addAttribute("category", new Category());
         return "admin-categories/categories-manager";
     }
 

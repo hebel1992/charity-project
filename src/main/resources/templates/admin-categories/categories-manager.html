@@ -30,14 +30,33 @@
                     <div class="card-header align-middle"><i class="fas fa-table mr-1"></i>Dodawanie/usuwanie kategorii
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="form-group col-sm-4" style="margin-bottom: 50px">
+                            <form th:action="@{/admin/add-category-action}" method="post" th:object="${category}">
+                                <div class="form-group">
+                                    <label for="inputName">Nazwa</label>
+                                    <input th:field="*{name}" type="text" class="form-control" id="inputName">
+                                    <span class="error-message" th:if="${#fields.hasErrors('name')}"
+                                          th:errors="*{name}"></span>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Dodaj</button>
+                            </form>
+                        </div>
 
+                        <div class="row">
+                            <div class="col-sm-3" th:each="category : ${categories}">
+                                <div class="card" style="margin-bottom: 20px; background-color: skyblue">
+                                    <div class="card-body">
+                                        <h5 class="card-title" th:text="${category.name}"></h5>
+                                        <a style="float: right" th:href="@{'/admin/delete-category/' + ${category.id}}"
+                                           class="btn btn-danger">Usuń</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
-
         <div th:include="admin-main/admin-footer.html"></div>
 
     </div>
