@@ -58,8 +58,8 @@ class FormTest {
         city = "Pławy";
         zipCode = "43-123";
         phone = "456123098";
-        date = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.ENGLISH).format(LocalDate.now().plus(5, ChronoUnit.DAYS));
-        time = "1600";
+        date = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.UK).format(LocalDate.now().plus(5, ChronoUnit.DAYS));
+        time = "1000";
 
 
         webDriver.get(url);

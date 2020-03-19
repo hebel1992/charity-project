@@ -1,8 +1,11 @@
 package pl.coderslab.charityproject.controllers.adminPanel;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import pl.coderslab.charityproject.models.CurrentUser;
 import pl.coderslab.charityproject.models.Donation;
+import pl.coderslab.charityproject.models.User;
 import pl.coderslab.charityproject.services.DonationService;
 import pl.coderslab.charityproject.services.InstitutionService;
 import pl.coderslab.charityproject.services.UserService;
@@ -42,5 +45,10 @@ public class AbstractController {
     @ModelAttribute("countInstitutions")
     public Integer countInstitutions(){
         return institutionService.findAll().size();
+    }
+
+    @ModelAttribute("currentUser")
+    public User currentUser(@AuthenticationPrincipal CurrentUser currentUser){
+        return currentUser.getUser();
     }
 }
