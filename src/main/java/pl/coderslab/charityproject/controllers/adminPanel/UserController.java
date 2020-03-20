@@ -65,8 +65,8 @@ public class UserController extends AbstractController {
     }
 
     @RequestMapping("/change-user-password/{userId}")
-    public String changeUserPassword(Model model, @PathVariable("userId") Long instId) {
-        User user = userService.findById(instId);
+    public String changeUserPassword(Model model, @PathVariable("userId") Long userId) {
+        User user = userService.findById(userId);
         model.addAttribute("user", user);
         return "admin-users/change-user-password";
     }

@@ -15,6 +15,7 @@ import pl.coderslab.charityproject.services.DonationService;
 import pl.coderslab.charityproject.services.InstitutionService;
 import pl.coderslab.charityproject.services.UserService;
 import pl.coderslab.charityproject.validationGroups.EditedUser;
+import pl.coderslab.charityproject.validationGroups.UserChangingPassword;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -57,9 +58,11 @@ public class AdminController extends AbstractController {
     }
 
     @RequestMapping("/edit-admin/{adminId}")
-    public String editAdmin(Model model, @PathVariable("adminId") Long instId) {
+    public String editAdmin(Model model, @PathVariable("adminId") Long instId,
+                            @RequestParam(value = "passwordChanged", required = false) String passwordChanged) {
         User admin = userService.findById(instId);
         model.addAttribute("admin", admin);
+        model.addAttribute("passwordChanged", passwordChanged);
         return "admin-admins/edit-admin";
     }
 
@@ -75,6 +78,31 @@ public class AdminController extends AbstractController {
         userService.saveUser(admin, "admin", false);
 
         return "redirect:/admin/admins";
+    }
+
+    @RequestMapping("/change-admin-password/{adminId}")
+    public String changeAdminPassword(Model model, @PathVariable("adminId") Long adminId) {
+        User user = userService.findById(adminId);
+        model.addAttribute("admin", user);
+        return "admin-admins/change-admin-password";
+    }
+
+    @PostMapping("/change-admin-password-action")
+    public String changeAdminPasswordAction(Model model, @RequestParam("password2") String pass2,
+                                           @ModelAttribute("admin") @Validated({UserChangingPassword.class}) User admin,
+                                           BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "admin-admins/change-admin-password";
+        }
+
+        if (!admin.getPassword().equals(pass2)) {
+            model.addAttribute("passNoMatch", true);
+            return "admin-admins/change-admin-password";
+        }
+
+        userService.saveUser(admin, "admin", true);
+
+        return "redirect:/admin/edit-admin/" + admin.getId() + "?passwordChanged=yes";
     }
 
     @RequestMapping("/add-admin")
