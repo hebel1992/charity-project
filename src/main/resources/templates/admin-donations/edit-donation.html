@@ -37,6 +37,7 @@
                             <div class="form-group">
                                 <label for="choose-user">Użytkownik</label>
                                 <select th:field="*{user}" class="form-control" id="choose-user">
+                                    <option th:value="null">--Wybierz Użytkownika--</option>
                                     <option th:each="user : ${users}"
                                             th:value="${user.id}"
                                             th:text="${user.firstName + ' ' + user.lastName}">
@@ -48,7 +49,8 @@
 
                             <div class="form-group">
                                 <label for="choose-category">Kategoria</label>
-                                <select th:field="*{categories}" multiple class="form-control" id="choose-category">
+                                <select th:field="*{categories}" multiple class="form-control"
+                                        id="choose-category">
                                     <option th:each="category : ${categories}"
                                             th:value="${category.id}"
                                             th:text="${category.name}">
@@ -61,6 +63,7 @@
                             <div class="form-group">
                                 <label for="choose-inst">Fundacja</label>
                                 <select th:field="*{institution}" class="form-control" id="choose-inst">
+                                    <option th:value="null">--Wybierz Fundację--</option>
                                     <option th:each="institution : ${institutions}"
                                             th:value="${institution.id}"
                                             th:text="${institution.name}">
@@ -185,6 +188,7 @@
     * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin/blob/master/LICENSE)
     */
     (function ($) {
+
         "use strict";
 
         // Add active state to sidbar nav links

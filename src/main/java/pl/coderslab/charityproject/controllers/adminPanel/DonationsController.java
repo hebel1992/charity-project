@@ -13,6 +13,7 @@ import pl.coderslab.charityproject.services.CategoryService;
 import pl.coderslab.charityproject.services.DonationService;
 import pl.coderslab.charityproject.services.InstitutionService;
 import pl.coderslab.charityproject.services.UserService;
+import pl.coderslab.charityproject.validationGroups.AdminCreatingDonation;
 import pl.coderslab.charityproject.validationGroups.UserCreatingDonation;
 
 import javax.validation.Valid;
@@ -55,7 +56,7 @@ public class DonationsController extends AbstractController {
 
     @PostMapping("/edit-donation-action")
     public String editDonationAction(Model model,
-                                     @ModelAttribute("donation") @Validated({Default.class}) Donation donation, BindingResult bindingResult) {
+                                     @ModelAttribute("donation") @Validated({Default.class, AdminCreatingDonation.class}) Donation donation, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "admin-donations/edit-donation";
         }
@@ -78,7 +79,7 @@ public class DonationsController extends AbstractController {
     }
 
     @PostMapping("/add-donation-action")
-    public String addDonationAction(@ModelAttribute("donation") @Validated({Default.class}) Donation donation,
+    public String addDonationAction(@ModelAttribute("donation") @Validated({Default.class, AdminCreatingDonation.class}) Donation donation,
                                     BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "admin-donations/add-donation";

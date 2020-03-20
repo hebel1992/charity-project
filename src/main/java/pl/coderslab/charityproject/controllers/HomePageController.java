@@ -42,7 +42,7 @@ public class HomePageController {
 
     @PostMapping("/donate-execute")
     public String donateActionExecute(@AuthenticationPrincipal CurrentUser currentUser,
-                                      @ModelAttribute("donation") @Validated({UserCreatingDonation.class}) Donation donation, BindingResult bindingResult) {
+                                      @ModelAttribute("donation") @Valid Donation donation, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "form";
         }
