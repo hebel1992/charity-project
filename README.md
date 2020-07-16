@@ -2,7 +2,7 @@
 
 Application for giving away unneeded items(clothes, toys, gadgets, etc.) for the charity. User after creating
 account and logging in gets access to the form in which he delivers details about his request and chooses a foundation he would like
-to support. The service also provides admin panel to control all parts of application.
+to support. The service also provides admin panel to control all aspects of application.
 
 Technologies used: Java, Spring Boot, Spring Security, Thymeleaf, Hibernate, MySql, HTML, CSS, Java Script, Bootstrap.
 
